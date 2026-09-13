@@ -1,1 +1,58 @@
-.idea
+# --- Виртуальные окружения (КРИТИЧНО) ---
+.venv/
+env/
+venv/
+ENV/
+
+# --- Кэш Python и байткод ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Специфика uv ---
+# uv кэширует сборки глобально в системе, но если задан локальный кэш:
+.uv_cache/
+
+# --- Переменные окружения и секреты ---
+.env
+.env.*
+!.env.example
+
+# --- Специфика ОС (Windows / Linux / macOS) ---
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- Редакторы и IDE ---
+# PyCharm / JetBrains
+.idea/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+
+# --- Логи и базы данных ---
+*.log
+*.sqlite3
+*.db
+
+# --- Тесты и покрытие кодом ---
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
