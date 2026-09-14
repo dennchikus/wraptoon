@@ -12,7 +12,11 @@ details = {
     ,"Стойки": 2000
 }
 
-@router.post("")
+@router.post(
+    "",
+    summary="Основной калькулятор стоимости",
+    description="Эндпоинт, расчитывающий общую стоимость оклейки"
+)
 def calc(
         kapot: int = Body(default=0),
         fari: int = Body(default=0),
@@ -20,4 +24,7 @@ def calc(
         stoyki: int = Body(default=0)
 ):
     result = kapot*details["Капот"]+fari*details["Фары"]+bumper*details["Передний бампер"]+stoyki*details["Стойки"]
-    return {"Рассчетная стоимость": f"{result}P."}
+    return {"Рассчетная стоимость": f"{result}P.",
+            "status": "OK"}
+
+# TODO Начать делать пайдентик схемы.
