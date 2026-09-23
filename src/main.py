@@ -9,11 +9,11 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
 # Роутеры
-from src.api.calc import router as router_calc
+from src.api.details import router as router_details
 
 app = FastAPI()
 
-app.include_router(router_calc)
+app.include_router(router_details)
 
 if __name__ == "__main__":
     uvicorn.run("main:app", reload=True)
