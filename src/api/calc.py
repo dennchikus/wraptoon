@@ -28,3 +28,6 @@ def calc(
             "status": "OK"}
 
 # TODO Начать делать пайдентик схемы.
+
+# CRUD - create read update     delete
+#        post   get  put/patch  delete
