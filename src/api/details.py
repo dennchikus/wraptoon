@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException
-
-from schemas.details import RequestAddDetails, PATCHDetails
-from src.database import async_session_maker
+from fastapi import APIRouter, HTTPException, Query
 from sqlalchemy import select, insert, update, delete
+
+from src.repositories.details import DetailsRepository
+from src.schemas.details import RequestAddDetails, PATCHDetails
+from src.database import async_session_maker
 from src.models.details import DetailsORM
 
 router = APIRouter(
@@ -11,38 +12,22 @@ router = APIRouter(
 )
 
 @router.get("")
-async def get_details():
-    async with async_session_maker() as session:
-        query = select(DetailsORM)
-        result = await session.execute(query)
-        return {"result": result.scalars().all()}
-
-@router.get("/{detail_id}")
-async def get_detail(
-        detail_id: int
+async def get_details_by_name(
+        name_detail: str | None = Query(None),
 ):
     async with async_session_maker() as session:
-        query = select(DetailsORM).filter_by(id=detail_id)
-        result = await session.execute(query)
-        result = result.scalars().one_or_none()
-        if result is None:
-            raise HTTPException(status_code=404, detail="Detail not found!")
-        return {
-            "status": "OK",
-            "data": result
-        }
+        return await DetailsRepository(session).get_filtered_by_name(name_detail=name_detail)
 
 @router.post("")
 async def add_detail(
         data: RequestAddDetails
 ):
     async with async_session_maker() as session:
-        query = insert(DetailsORM).values(name_detail=data.name_detail, price=data.price).returning(DetailsORM)
-        result = await session.execute(query)
+        result = await DetailsRepository(session).add(data)
         await session.commit()
         return {
             "status": "OK",
-            "data": result.scalars().one()
+            "data": result
         }
 
 @router.put("/{detail_id}")
@@ -51,13 +36,7 @@ async def full_update_detail(
         data: RequestAddDetails
 ):
     async with async_session_maker() as session:
-        query = (
-            update(DetailsORM)
-            .filter_by(id=detail_id)
-            .values(**data.model_dump())
-            .returning(DetailsORM)
-        )
-        result = await session.execute(query)
+
         await session.commit()
         return {
             "status": "OK",
