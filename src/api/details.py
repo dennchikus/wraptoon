@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, HTTPException
 
 from schemas.details import RequestAddDetails, PATCHDetails
 from src.database import async_session_maker
@@ -11,17 +11,25 @@ router = APIRouter(
 )
 
 @router.get("")
-async def get_detail(
-        detail_id: int = Query(default=None)
-):
+async def get_details():
     async with async_session_maker() as session:
         query = select(DetailsORM)
-        if detail_id is not None:
-           query = query.filter_by(id=detail_id)
         result = await session.execute(query)
+        return {"result": result.scalars().all()}
+
+@router.get("/{detail_id}")
+async def get_detail(
+        detail_id: int
+):
+    async with async_session_maker() as session:
+        query = select(DetailsORM).filter_by(id=detail_id)
+        result = await session.execute(query)
+        result = result.scalars().one_or_none()
+        if result is None:
+            raise HTTPException(status_code=404, detail="Detail not found!")
         return {
             "status": "OK",
-            "data": result.scalars().all()
+            "data": result
         }
 
 @router.post("")
@@ -37,7 +45,7 @@ async def add_detail(
             "data": result.scalars().one()
         }
 
-@router.put("")
+@router.put("/{detail_id}")
 async def full_update_detail(
         detail_id: int,
         data: RequestAddDetails
@@ -56,8 +64,8 @@ async def full_update_detail(
             "data": result.scalars().one()
         }
 
-@router.patch("")
-async def full_update_detail(
+@router.patch("/{detail_id}")
+async def partially_update_detail(
         detail_id: int,
         data: PATCHDetails
 ):
@@ -75,7 +83,7 @@ async def full_update_detail(
             "data": result.scalars().one()
         }
 
-@router.delete("")
+@router.delete("/{detail_id}")
 async def delete_detail_by_id(
         detail_id: int
 ):
