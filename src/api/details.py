@@ -36,15 +36,10 @@ async def full_update_detail(
         data: RequestAddDetails
 ):
     async with async_session_maker() as session:
-        _data = {"id": detail_id, **data.model_dump()}
-        result = await DetailsRepository(session).edit(_data)
-
-        if result is None:
-            raise HTTPException(status_code=404, detail="Деталь не найдена")
+        await DetailsRepository(session).edit(data=data, id=detail_id)
         await session.commit()
         return {
             "status": "OK",
-            "data": result
         }
 
 @router.patch("/{detail_id}")
@@ -53,14 +48,16 @@ async def partially_update_detail(
         data: PATCHDetails
 ):
     async with async_session_maker() as session:
-        _data = {"id": detail_id, **data.model_dump(exclude_unset=True)}
-        result = await DetailsRepository(session).edit(_data)
-        if result is None:
-            raise HTTPException(status_code=404, detail="Деталь не найдена")
+        if data:
+            print(data)
+        else:
+            print("data is clear")
+        await DetailsRepository(session).edit(data=data, id=detail_id, is_patch=True)
+        # if result is None:
+        #     raise HTTPException(status_code=404, detail="Деталь не найдена")
         await session.commit()
         return {
             "status": "OK",
-            "data": result
         }
 
 @router.delete("/{detail_id}")

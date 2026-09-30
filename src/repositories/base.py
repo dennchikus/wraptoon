@@ -45,20 +45,14 @@ class BaseRepository():
         model = result.scalars().one()
         return self.schema.model_validate(model, from_attributes=True)
 
-    async def edit(self, data: dict):
-        values = dict(data)
-        item_id = values.pop("id", None)
+    async def edit(self, data: BaseModel, is_patch: bool = False, **filter_by):
         query = (
             update(self.model)
-            .values(**values)
-            .filter_by(id=item_id)
-            .returning(self.model)
+            .filter_by(**filter_by)
+            .values(**data.model_dump(exclude_unset=is_patch))
         )
-        result = await self.session.execute(query)
-        model = result.scalars().one_or_none()
-        if model is not None:
-            return self.schema.model_validate(model, from_attributes=True)
-        return None
+        await self.session.execute(query)
+
 
     async def delete(self, **filter_by):
         query = (
