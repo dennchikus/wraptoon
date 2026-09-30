@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from sqlalchemy import select, insert
+from sqlalchemy import select, insert, update, delete
 
 
 class BaseRepository():
@@ -44,3 +44,25 @@ class BaseRepository():
         result = await self.session.execute(query)
         model = result.scalars().one()
         return self.schema.model_validate(model, from_attributes=True)
+
+    async def edit(self, data: dict):
+        values = dict(data)
+        item_id = values.pop("id", None)
+        query = (
+            update(self.model)
+            .values(**values)
+            .filter_by(id=item_id)
+            .returning(self.model)
+        )
+        result = await self.session.execute(query)
+        model = result.scalars().one_or_none()
+        if model is not None:
+            return self.schema.model_validate(model, from_attributes=True)
+        return None
+
+    async def delete(self, **filter_by):
+        query = (
+            delete(self.model)
+            .filter_by(**filter_by)
+        )
+        await self.session.execute(query)
