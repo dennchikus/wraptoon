@@ -60,3 +60,4 @@ class BaseRepository():
             .filter_by(**filter_by)
         )
         await self.session.execute(query)
+
