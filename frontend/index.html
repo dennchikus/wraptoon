@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WRAP TOON — Детейлинг & Оклейка авто</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ШАПКА НА ВСЮ ШИРИНУ -->
+  <header class="toon-header">
+    <a href="index.html" class="toon-logo">
+      <span class="logo-icon">🅤</span>
+      <div class="logo-text">
+        <strong>WRAP TOON</strong>
+        <small>• EST. 2026 GARAGE •</small>
+      </div>
+    </a>
+
+    <nav class="toon-nav">
+      <a href="index.html" class="nav-link active" style="text-decoration: underline; font-weight: 800;">Главная</a>
+      <a href="calculator.html" class="nav-link">Калькулятор</a>
+      <a href="services.html" class="nav-link">Услуги</a>
+      <a href="about.html" class="nav-link">О гараже</a>
+    </nav>
+
+    <div class="toon-header-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
+      <a href="calculator.html" class="toon-btn-book">
+        РАССЧИТАТЬ ПРАЙС
+      </a>
+    </div>
+  </header>
+
+  <!-- ШИРОКИЙ КОНТЕЙНЕР (1200px) -->
+  <main class="container">
+    
+    <!-- 1. HERO СЕКЦИЯ: ЛОГОТИП СЛЕВА, ОПИСАНИЕ СПРАВА -->
+    <div class="toon-card toon-hero">
+      <div class="hero-logo-box">
+        <div class="hero-icon">🏎</div>
+        <span>WRAP TOON</span>
+      </div>
+
+      <div class="hero-content">
+        <div style="display: flex; gap: 8px;">
+          <span class="toon-chip is-active">⚡ GARAGE TUNING & PROTECTION</span>
+          <span class="toon-chip">EST. 2026</span>
+        </div>
+        <h1 class="hero-title">
+          Оклейка авто и детейлинг в Москве
+        </h1>
+        <p class="hero-desc">
+          Полная защита кузова полиуретановой бронёй, кардинальная смена цвета винилом и премиальная тонировка стёкол. Прозрачный онлайн-расчёт стоимости за 1 минуту.
+        </p>
+        <div style="display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap;">
+          <a href="calculator.html" class="toon-btn toon-btn--accent" style="font-size: 15px; padding: 12px 28px;">
+            🧮 ОНЛАЙН-КАЛЬКУЛЯТОР →
+          </a>
+          <a href="services.html" class="toon-btn" style="font-size: 15px; padding: 12px 24px;">
+            Подробнее об услугах
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. СКРОЛЛЕР ФОТОК РАБОТ (3 ФОТО: ЦЕНТРАЛЬНАЯ ВЫШЕ НА СЛОЙ) -->
+    <div class="toon-card showcase-section">
+      <div class="showcase-header">
+        <div>
+          <h2 style="margin: 0; font-size: 22px; text-transform: uppercase;">Свежие работы студии</h2>
+          <span style="font-size: 13px; color: var(--color-muted);">Листайте примеры выполненных проектов</span>
+        </div>
+        <!-- КНОПКИ ПЕРЕМОТКИ -->
+        <div style="display: flex; gap: 8px;">
+          <button id="prev-btn" class="showcase-nav-btn" aria-label="Назад">←</button>
+          <button id="next-btn" class="showcase-nav-btn" aria-label="Вперёд">→</button>
+        </div>
+      </div>
+
+      <div class="showcase-wrapper" id="showcase-touch-area">
+        <div class="showcase-track" id="showcase-track">
+          
+          <!-- Карточка 1 (Левая / боковая) -->
+          <div class="showcase-card is-side" data-index="0">
+            <div class="showcase-img-placeholder" style="background: linear-gradient(135deg, #1e293b, #334155); color: #fff;">
+              <span style="font-size: 40px; margin-bottom: 8px;">🚘</span>
+              <span>ФОТО АВТО #1</span>
+            </div>
+            <div class="showcase-info">
+              <h4>Porsche 911 Carrera</h4>
+              <p>🎨 Винил: Nardo Grey суперглянец + антихром</p>
+            </div>
+          </div>
+
+          <!-- Карточка 2 (Центральная / АКТИВНАЯ НА ПЕРЕДНЕМ ПЛАНЕ) -->
+          <div class="showcase-card is-active" data-index="1">
+            <div class="showcase-img-placeholder" style="background: linear-gradient(135deg, #F7C642, #f59e0b); color: #18181B;">
+              <span style="font-size: 48px; margin-bottom: 8px;">🛡</span>
+              <span style="background: #18181B; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 12px;">ТОП ПРОЕКТ</span>
+            </div>
+            <div class="showcase-info">
+              <h4>BMW M5 Competition</h4>
+              <p>🛡 Матовый полиуретан кузова + бронь лобового</p>
+            </div>
+          </div>
+
+          <!-- Карточка 3 (Правая / боковая) -->
+          <div class="showcase-card is-side" data-index="2">
+            <div class="showcase-img-placeholder" style="background: linear-gradient(135deg, #0f172a, #1e1b4b); color: #fff;">
+              <span style="font-size: 40px; margin-bottom: 8px;">🕶</span>
+              <span>ФОТО АВТО #3</span>
+            </div>
+            <div class="showcase-info">
+              <h4>Audi RS6 Avant</h4>
+              <p>🕶 Евротонировка 5% + полиуретан зон риска</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. БЛОК 3 ВИДОВ РАБОТ -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+      <div class="toon-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 36px; margin-bottom: 8px;">🎨</div>
+          <h3 style="margin: 0 0 8px; text-transform: uppercase;">Виниловая оклейка</h3>
+          <p style="font-size: 14px; color: var(--color-muted); margin: 0; line-height: 1.4;">
+            Полная или локальная смена цвета кузова: глубокий мат, шелковистый сатин или сочный ультраглянец.
+          </p>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="calculator.html" class="toon-btn" style="width: 100%; font-size: 13px;">Рассчитать винил →</a>
+        </div>
+      </div>
+
+      <div class="toon-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 36px; margin-bottom: 8px;">🛡</div>
+          <h3 style="margin: 0 0 8px; text-transform: uppercase;">Полиуретан (PPF)</h3>
+          <p style="font-size: 14px; color: var(--color-muted); margin: 0; line-height: 1.4;">
+            Надёжная броня от сколов, гравия и притёртостей с гидрофобом и самозатягивающимся верхним слоем.
+          </p>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="calculator.html" class="toon-btn" style="width: 100%; font-size: 13px;">Рассчитать броню →</a>
+        </div>
+      </div>
+
+      <div class="toon-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="font-size: 36px; margin-bottom: 8px;">🕶</div>
+          <h3 style="margin: 0 0 8px; text-transform: uppercase;">Тонировка стёкол</h3>
+          <p style="font-size: 14px; color: var(--color-muted); margin: 0; line-height: 1.4;">
+            Защита салона от выгорания и перегрева на солнце, стильный вид и полная приватность пассажиров.
+          </p>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="calculator.html" class="toon-btn" style="width: 100%; font-size: 13px;">Рассчитать тонировку →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. ПОЧЕМУ НАШ ГАРАЖ -->
+    <div class="toon-card">
+      <h3 style="margin-top: 0; text-transform: uppercase; font-size: 20px;">Почему выбирают наш гараж?</h3>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
+        <span class="toon-btn toon-chip">🔒 Гарантия на работы до 5 лет</span>
+        <span class="toon-btn toon-chip">📐 Раскрой строго по лекалам без ножа по кузову</span>
+        <span class="toon-btn toon-chip">🧼 Чистый бокс с правильной вентиляцией</span>
+        <span class="toon-btn toon-chip">⏱ Точные сроки без задержек</span>
+        <span class="toon-btn toon-chip">☕ Уютная зона ожидания</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- СКРИПТ КАРУСЕЛИ РАБОТ: СТРЕЛКИ + СВАЙПЫ + КЛИКИ -->
+  <script>
+    // Данные для карусели (в будущем легко заменить на реальные фото через backend/json)
+    const projects = [
+      {
+        title: "Porsche 911 Carrera",
+        desc: "🎨 Винил: Nardo Grey суперглянец + антихром",
+        icon: "🏎",
+        gradient: "linear-gradient(135deg, #1e293b, #334155)",
+        textColor: "#fff",
+        badge: ""
+      },
+      {
+        title: "BMW M5 Competition",
+        desc: "🛡 Матовый полиуретан кузова + бронь лобового",
+        icon: "🛡",
+        gradient: "linear-gradient(135deg, #F7C642, #f59e0b)",
+        textColor: "#18181B",
+        badge: "ТОП ПРОЕКТ"
+      },
+      {
+        title: "Audi RS6 Avant",
+        desc: "🕶 Евротонировка 5% + полиуретан зон риска",
+        icon: "🕶",
+        gradient: "linear-gradient(135deg, #0f172a, #1e1b4b)",
+        textColor: "#fff",
+        badge: ""
+      },
+      {
+        title: "Mercedes-AMG GT",
+        desc: "🎨 Черный сатин + бронирование фар полиуретаном",
+        icon: "⚡",
+        gradient: "linear-gradient(135deg, #27272a, #09090b)",
+        textColor: "#fff",
+        badge: "NEW"
+      },
+      {
+        title: "Range Rover Sport",
+        desc: "🛡 Полный глянец полиуретан + бронь крыши",
+        icon: "🚙",
+        gradient: "linear-gradient(135deg, #065f46, #047857)",
+        textColor: "#fff",
+        badge: ""
+      }
+    ];
+
+    let activeIdx = 1; // Стартуем со 2-го проекта как активного
+
+    function renderCarousel() {
+      const total = projects.length;
+      const prevIdx = (activeIdx - 1 + total) % total;
+      const nextIdx = (activeIdx + 1) % total;
+
+      const indices = [prevIdx, activeIdx, nextIdx];
+      const track = document.getElementById('showcase-track');
+      track.innerHTML = '';
+
+      indices.forEach((idx, pos) => {
+        const item = projects[idx];
+        const isActive = pos === 1;
+
+        const card = document.createElement('div');
+        card.className = `showcase-card ${isActive ? 'is-active' : 'is-side'}`;
+        card.dataset.index = idx;
+
+        const badgeHtml = item.badge 
+          ? `<span style="background: #18181B; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; margin-top: 8px;">${item.badge}</span>` 
+          : '';
+
+        card.innerHTML = `
+          <div class="showcase-img-placeholder" style="background: ${item.gradient}; color: ${item.textColor};">
+            <span style="font-size: ${isActive ? '48px' : '40px'}; line-height: 1;">${item.icon}</span>
+            ${badgeHtml}
+          </div>
+          <div class="showcase-info">
+            <h4>${item.title}</h4>
+            <p>${item.desc}</p>
+          </div>
+        `;
+
+        // Клик по боковой карточке делает её активной
+        if (!isActive) {
+          card.addEventListener('click', () => {
+            activeIdx = idx;
+            renderCarousel();
+          });
+        }
+
+        track.appendChild(card);
+      });
+    }
+
+    // Кнопки влево / вправо
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      activeIdx = (activeIdx - 1 + projects.length) % projects.length;
+      renderCarousel();
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      activeIdx = (activeIdx + 1) % projects.length;
+      renderCarousel();
+    });
+
+    // Поддержка свайпов для телефонов
+    let startX = 0;
+    const touchArea = document.getElementById('showcase-touch-area');
+
+    touchArea.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    touchArea.addEventListener('touchend', (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          // Свайп влево -> следующий
+          activeIdx = (activeIdx + 1) % projects.length;
+        } else {
+          // Свайп вправо -> предыдущий
+          activeIdx = (activeIdx - 1 + projects.length) % projects.length;
+        }
+        renderCarousel();
+      }
+    }, { passive: true });
+
+    // Инициализация карусели
+    renderCarousel();
+  </script>
+  <!-- Подключение темы -->
+  <script src="theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WRAP TOON — Калькулятор оклейки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ШАПКА -->
+  <header class="toon-header">
+    <a href="index.html" class="toon-logo">
+      <span class="logo-icon">🅤</span>
+      <div class="logo-text">
+        <strong>WRAP TOON</strong>
+        <small>• EST. 2026 GARAGE •</small>
+      </div>
+    </a>
+
+    <nav class="toon-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="calculator.html" class="nav-link active" style="text-decoration: underline; font-weight: 800;">Калькулятор</a>
+      <a href="services.html" class="nav-link">Услуги</a>
+      <a href="about.html" class="nav-link">О гараже</a>
+    </nav>
+
+    <div class="toon-header-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
+      <a href="#total-block" class="toon-btn-book">
+        ЗАНЯТЬ БОКС
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toon-card">
+      <h2 style="margin-top: 0; text-transform: uppercase;">Калькулятор оклейки</h2>
+      <p style="color: var(--color-muted); margin-bottom: 24px;">Выберите нужные категории и детали для точного расчёта стоимости</p>
+
+      <!-- 1. ВИНИЛ (СМЕНА ЦВЕТА) -->
+      <details class="toon-accordion" open>
+        <summary class="toon-accordion-header">
+          <span>🎨 Виниловая плёнка (смена цвета)</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Капот</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Бампер передний</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Бампер задний</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Винил">
+            <span>Передние крылья (комплект)</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Винил">
+            <span>Задние крылья (комплект)</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Крыша</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          
+          <!-- ДВЕРИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="12000" data-count="1" data-max="4" data-service="Винил">
+            <div style="display: flex; align-items: center;">
+              <span>Двери</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="12000" style="font-weight: 700;">12 000 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="8000" data-service="Винил">
+            <span>Крышка багажника</span>
+            <span style="font-weight: 700;">8 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Винил">
+            <span>Стойки лобового стекла</span>
+            <span style="font-weight: 700;">3 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2. ПОЛИУРЕТАН (БРОНЯ) -->
+      <details class="toon-accordion">
+        <summary class="toon-accordion-header">
+          <span>🛡 Защитный полиуретан (броня PPF)</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Капот</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Бампер передний</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Бампер задний</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан">
+            <span>Передние крылья (комплект)</span>
+            <span style="font-weight: 700;">15 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан">
+            <span>Задние крылья (комплект)</span>
+            <span style="font-weight: 700;">15 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Крыша</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+
+          <!-- ДВЕРИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="10000" data-count="1" data-max="4" data-service="Полиуретан">
+            <div style="display: flex; align-items: center;">
+              <span>Двери</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="10000" style="font-weight: 700;">10 000 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Полиуретан">
+            <span>Крышка багажника</span>
+            <span style="font-weight: 700;">6 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="4000" data-service="Полиуретан">
+            <span>Фары передние</span>
+            <span style="font-weight: 700;">4 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Полиуретан">
+            <span>Фары задние</span>
+            <span style="font-weight: 700;">3 000 ₽</span>
+          </div>
+
+          <!-- ГЛЯНЦЕВЫЕ СТОЙКИ (СО СТЕППЕРОМ ДО 6 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="6000" data-count="1" data-max="6" data-service="Полиуретан">
+            <div style="display: flex; align-items: center;">
+              <span>Глянцевые стойки</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="6000" style="font-weight: 700;">6 000 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полиуретан">
+            <span>Стойки лобового стекла</span>
+            <span style="font-weight: 700;">2 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. ТОНИРОВКА И СТЕКЛА -->
+      <details class="toon-accordion">
+        <summary class="toon-accordion-header">
+          <span>🕶 Тонировка и стёкла</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="14000" data-service="Броня">
+            <span>Бронирование лобового стекла (ClearPlex от сколов)</span>
+            <span style="font-weight: 700;">14 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Тонировка">
+            <span>Лобовое стекло (Тонировка)</span>
+            <span style="font-weight: 700;">6 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="5000" data-service="Тонировка">
+            <span>Заднее стекло (Тонировка)</span>
+            <span style="font-weight: 700;">5 000 ₽</span>
+          </div>
+
+          <!-- БОКОВЫЕ СТЕКЛА (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="2500" data-count="1" data-max="4" data-service="Тонировка">
+            <div style="display: flex; align-items: center;">
+              <span>Боковые стёкла (Тонировка)</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="2500" style="font-weight: 700;">2 500 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Тонировка">
+            <span>Фары передние (Тонировка)</span>
+            <span style="font-weight: 700;">3 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Тонировка">
+            <span>Фары задние (Тонировка)</span>
+            <span style="font-weight: 700;">2 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- ИТОГОВЫЙ БЛОК -->
+      <div id="total-block" style="margin-top: 32px; padding-top: 20px; border-top: 2px dashed var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div style="font-size: 13px; color: var(--color-muted); font-weight: 600;">ИТОГО К ОПЛАТЕ:</div>
+          <div id="total-price" style="font-size: 36px; font-weight: 900; color: var(--color-border);">0 ₽</div>
+        </div>
+        <button id="book-btn" class="toon-btn toon-btn--primary" style="font-size: 16px; padding: 14px 28px;">
+          ЗАБРОНИРОВАТЬ →
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- СКРИПТ КАЛЬКУЛЯТОРА И СТЕППЕРОВ -->
+  <script>
+    const items = document.querySelectorAll('.calc-item');
+    const totalPriceEl = document.getElementById('total-price');
+
+    function formatNumber(num) {
+      return num.toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function calculateTotal() {
+      let total = 0;
+      items.forEach(item => {
+        if (item.classList.contains('is-selected')) {
+          const basePrice = parseInt(item.dataset.price, 10) || 0;
+          const count = parseInt(item.dataset.count, 10) || 1;
+          total += basePrice * count;
+        }
+      });
+      totalPriceEl.textContent = formatNumber(total);
+    }
+
+    items.forEach(item => {
+      const isCounter = item.dataset.type === 'counter';
+
+      if (!isCounter) {
+        // Обычные элементы без количества
+        item.addEventListener('click', () => {
+          item.classList.toggle('is-selected');
+          calculateTotal();
+        });
+      } else {
+        // Элементы со степпером количества (Двери, Стекла, Стойки)
+        const minusBtn = item.querySelector('.minus-btn');
+        const plusBtn = item.querySelector('.plus-btn');
+        const countEl = item.querySelector('.stepper-count');
+        const priceEl = item.querySelector('.item-price');
+        const stepper = item.querySelector('.stepper-controls');
+        const basePrice = parseInt(item.dataset.price, 10) || 0;
+        const max = parseInt(item.dataset.max, 10) || 4;
+
+        // Клик по всей плитке включает/выключает ее
+        item.addEventListener('click', (e) => {
+          // Если кликнули по кнопкам +/-, ничего не делаем здесь
+          if (e.target.closest('.stepper-btn')) return;
+
+          if (item.classList.contains('is-selected')) {
+            item.classList.remove('is-selected');
+            stepper.style.display = 'none';
+            item.dataset.count = 0;
+          } else {
+            item.classList.add('is-selected');
+            stepper.style.display = 'inline-flex';
+            item.dataset.count = 1;
+            countEl.textContent = '1';
+            priceEl.textContent = formatNumber(basePrice * 1);
+          }
+          calculateTotal();
+        });
+
+        // Кнопка МЕНЬШЕ (-)
+        minusBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let count = parseInt(item.dataset.count, 10) || 1;
+          count -= 1;
+          if (count < 1) {
+            item.classList.remove('is-selected');
+            stepper.style.display = 'none';
+            item.dataset.count = 0;
+          } else {
+            item.dataset.count = count;
+            countEl.textContent = count;
+            priceEl.textContent = formatNumber(basePrice * count);
+          }
+          calculateTotal();
+        });
+
+        // Кнопка БОЛЬШЕ (+)
+        plusBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let count = parseInt(item.dataset.count, 10) || 1;
+          if (count < max) {
+            count += 1;
+            item.dataset.count = count;
+            countEl.textContent = count;
+            priceEl.textContent = formatNumber(basePrice * count);
+            calculateTotal();
+          }
+        });
+      }
+    });
+  </script>
+
+  <!-- Подключение темы -->
+  <script src="theme.js"></script>
+</body>
+</html>

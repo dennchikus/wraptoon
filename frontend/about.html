@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WRAP TOON — О гараже</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="toon-header">
+    <a href="index.html" class="toon-logo">
+      <span class="logo-icon">🅤</span>
+      <div class="logo-text">
+        <strong>WRAP TOON</strong>
+        <small>• EST. 2026 GARAGE •</small>
+      </div>
+    </a>
+
+    <nav class="toon-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="calculator.html" class="nav-link">Калькулятор</a>
+      <a href="services.html" class="nav-link">Услуги</a>
+      <a href="about.html" class="nav-link active" style="text-decoration: underline; font-weight: 800;">О гараже</a>
+    </nav>
+
+    <div class="toon-header-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
+      <a href="calculator.html" class="toon-btn-book">
+        ЗАНЯТЬ БОКС
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toon-card">
+      <h2 style="margin-top: 0; text-transform: uppercase;">О нашей студии WRAP TOON</h2>
+      <p style="color: var(--color-muted); margin-bottom: 20px;">Мы — команда энтузиастов, влюблённых в эстетику и качество детейлинга.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="background: var(--bg-page); padding: 16px; border-radius: 12px; border: var(--border-width) solid var(--color-border);">
+          <strong>📍 Адрес:</strong> г. Москва, ул. Автомобильная, д. 42 (Бокс №7)
+        </div>
+        <div style="background: var(--bg-page); padding: 16px; border-radius: 12px; border: var(--border-width) solid var(--color-border);">
+          <strong>⏰ График работы:</strong> Ежедневно с 10:00 до 21:00 (по предварительной записи)
+        </div>
+        <div style="background: var(--bg-page); padding: 16px; border-radius: 12px; border: var(--border-width) solid var(--color-border);">
+          <strong>📞 Телефон & Telegram:</strong> +7 (999) 000-00-00 / @wraptoon_garage
+        </div>
+      </div>
+
+      <div style="margin-top: 28px;">
+        <a href="calculator.html" class="toon-btn toon-btn--accent" style="width: 100%; text-align: center; padding: 14px;">
+          РАССЧИТАТЬ СТОИМОСТЬ СВОЕГО АВТО →
+        </a>
+      </div>
+    </div>
+  </main>
+  <!-- Подключение темы -->
+  <script src="theme.js"></script>
+</body>
+</html>
