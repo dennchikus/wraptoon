@@ -46,18 +46,26 @@ details_services = [
 async def seed():
     print("Начало заполнения таблиц...")
     async with get_db_manager() as db:
-        if not await db.services.is_empty() or not await db.details.is_empty() or not await db.services_details.is_empty():
+
+        if any([not await db.services.is_empty(),
+               not await db.details.is_empty(),
+               not await db.services_details.is_empty()
+                ]):
             print("В таблицах уже есть какие-то данные")
             return
+
         for detail in details:
             await db.details.add(RequestAddDetails(name_detail=detail))
         print("Таблица деталей заполнена")
+
         for service in services:
             await db.services.add(RequestAddService(name_service=service))
         print("Таблица сервисов")
+
         for detail_name, service_name, price in details_services:
             await db.services_details.add_by_names(detail_name, service_name, price)
         print("Таблица зависимостей деталей с сервисами заполнена")
+
         await db.commit()
     print("Таблицы заполнены!")
 
