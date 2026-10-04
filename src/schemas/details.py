@@ -7,6 +7,4 @@ class RequestAddDetails(BaseModel): # получение данных от по�
 class Details(RequestAddDetails): # схема по которой данные отдаются пользователю
     id: int
 
-class PATCHDetails(BaseModel):
-    name_detail: str | None = Field(default=None)
 

@@ -9,9 +9,6 @@ class BaseRepository():
     def __init__(self, session):
         self.session = session
 
-
-    # GET by name
-
     async def get_filtered(self, *filter, **filter_by):
         query = (
             select(self.model)

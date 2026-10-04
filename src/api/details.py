@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
 
 from src.api.dependencies import DBDep
-from src.schemas.details import RequestAddDetails, PATCHDetails
+from src.schemas.details import RequestAddDetails
 
 router = APIRouter(
     prefix="/details",
@@ -34,21 +34,6 @@ async def full_update_detail(
         data: RequestAddDetails
 ):
     await db.details.edit(data=data, id=detail_id)
-    await db.commit()
-    return {
-        "status": "OK",
-    }
-
-@router.patch("/{detail_id}")
-async def partially_update_detail(
-        db: DBDep,
-        detail_id: int,
-        data: PATCHDetails
-):
-    _data = data.model_dump(exclude_unset=True)
-    if not _data:
-        raise HTTPException(status_code=400, detail="Bad Request")
-    await db.details.edit(data=data, id=detail_id, is_patch=True)
     await db.commit()
     return {
         "status": "OK",
