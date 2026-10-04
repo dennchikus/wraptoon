@@ -10,4 +10,3 @@ class DetailsORM(Base):
 
     id:Mapped[int] = mapped_column(primary_key=True)
     name_detail:Mapped[str] = mapped_column(String(length=40))
-    price:Mapped[int]
