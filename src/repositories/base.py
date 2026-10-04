@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from sqlalchemy import select, insert, update, delete
+from sqlalchemy import select, insert, update, delete, func
 
 
 class BaseRepository():
@@ -58,3 +58,10 @@ class BaseRepository():
         )
         await self.session.execute(query)
 
+    async def is_empty(self) -> bool:
+        query = (
+            select(func.count())
+            .select_from(self.model)
+        )
+        result = await self.session.execute(query)
+        return result.scalar() == 0

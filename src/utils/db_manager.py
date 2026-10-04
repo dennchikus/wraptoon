@@ -1,5 +1,5 @@
 from src.repositories.details import DetailsRepository
-from src.repositories.services import ServiceRepository
+from src.repositories.services import ServicesRepository
 from src.repositories.services_details import ServicesDetailsRepository
 
 class DBManager():
@@ -9,7 +9,7 @@ class DBManager():
     async def __aenter__(self):
         self.session = self.session_factory()
 
-        self.services = ServiceRepository(self.session)
+        self.services = ServicesRepository(self.session)
         self.details = DetailsRepository(self.session)
         self.services_details = ServicesDetailsRepository(self.session)
 

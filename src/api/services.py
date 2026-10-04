@@ -15,7 +15,7 @@ async def get_services(
     return await db.services.get_all()
 
 @router.post("")
-async def add_details(
+async def add_service(
         db: DBDep,
         data: RequestAddService
 ):

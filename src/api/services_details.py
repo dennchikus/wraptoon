@@ -14,10 +14,7 @@ async def get_all_prices(
         db: DBDep,
 ):
     result = await db.services_details.get_all()
-    return {
-        "status": "OK",
-        "data": result
-    }
+    return result
 
 @router.post("")
 async def add_price(
@@ -31,31 +28,31 @@ async def add_price(
         "data": result
     }
 
-@router.put("/{id_price}")
+@router.put("/{price_id}")
 async def full_update_price(
         db: DBDep,
-        id_price: int,
+        price_id: int,
         data: RequestAddServiceDetail
 ):
-    await db.services_details.edit(data=data, id=id_price)
+    await db.services_details.edit(data=data, id=price_id)
     await db.commit()
     return {"status": "OK"}
 
-@router.patch("/{id_price}")
+@router.patch("/{price_id}")
 async def partially_update_price(
         db: DBDep,
-        id_price: int,
+        price_id: int,
         data: PATCHServiceDetail
 ):
-    await db.services_details.edit(data=data, is_patch=True, id=id_price)
+    await db.services_details.edit(data=data, is_patch=True, id=price_id)
     await db.commit()
     return {"status": "OK"}
 
-@router.delete("/{id_price}")
+@router.delete("/{price_id}")
 async def delete_price(
         db: DBDep,
-        id_price: int
+        price_id: int
 ):
-    await db.services_details.delete(id=id_price)
+    await db.services_details.delete(id=price_id)
     await db.commit()
     return {"status": "OK"}

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 class RequestAddService(BaseModel): # получение данных от пользователя(дургой разраб/заказчик)
     name_service: str
