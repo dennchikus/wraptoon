@@ -713,3 +713,11 @@ h1, h2, h3, h4, .hero-title {
   border-color: var(--color-primary);
   box-shadow: 3px 3px 0px var(--shadow-color);
 }
+
+
+/* Фиксируем размер текстовых полей, запрещая растягивание за пределы окна */
+textarea.toon-input {
+  resize: none;
+  min-height: 80px;
+  max-height: 120px;
+}

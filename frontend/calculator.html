@@ -41,7 +41,7 @@
       <p style="color: var(--color-muted); margin-bottom: 24px;">Выберите нужные категории и детали для точного расчёта стоимости</p>
 
       <!-- 1. ВИНИЛ (СМЕНА ЦВЕТА) -->
-      <details class="toon-accordion" open>
+      <details class="toon-accordion">
         <summary class="toon-accordion-header">
           <span>🎨 Виниловая плёнка (смена цвета)</span>
         </summary>
@@ -227,9 +227,81 @@
       </div>
 
     </div>
+
+    <!-- БАННЕР НЕСТАНДАРТНОГО ПРОЕКТА / КОНСУЛЬТАЦИИ -->
+    <div class="toon-card" style="background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 24px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span class="toon-chip is-active" style="font-size: 11px;">🎨 ИНДИВИДУАЛЬНЫЙ ДИЗАЙН</span>
+          <span style="font-size: 14px; font-weight: 800; text-transform: uppercase;">Сложный проект или рисунок на авто?</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: var(--color-muted); max-width: 650px; line-height: 1.4;">
+          Винилография, печать авторских рисунков на плёнке, брендирование или нестандартные элементы. Обсудите вашу задумку напрямую с мастером.
+        </p>
+      </div>
+      <button id="consult-btn" type="button" class="toon-btn toon-btn--accent" style="padding: 12px 24px; font-size: 14px;">
+        ОБСУДИТЬ С МАСТЕРОМ →
+      </button>
+    </div>
+
   </main>
 
-  <!-- МОДАЛЬНОЕ ОКНО ЗАЯВКИ -->
+  <!-- МОДАЛЬНОЕ ОКНО КОНСУЛЬТАЦИИ -->
+  <dialog class="toon-modal" id="consult-modal">
+    <div class="toon-modal-header">
+      <h3 style="margin: 0; font-size: 20px; text-transform: uppercase;">Консультация с мастером</h3>
+      <button type="button" class="toon-modal-close" id="consult-close-btn" aria-label="Закрыть">✕</button>
+    </div>
+
+    <div style="background: var(--bg-subtle); border: var(--border-width) solid var(--color-border); border-radius: 12px; padding: 12px 16px; margin-bottom: 18px;">
+      <div style="font-size: 11px; color: var(--color-muted); font-weight: 700; text-transform: uppercase;">Бесплатная консультация</div>
+      <div style="font-size: 14px; font-weight: 800; margin-top: 2px;">Сложные проекты, рисунки на плёнке и оценка авто</div>
+    </div>
+
+    <form id="consult-form">
+      <div class="form-group">
+        <label for="consult-name">Ваше имя *</label>
+        <input type="text" id="consult-name" class="toon-input" placeholder="например, Александр" maxlength="50" required>
+      </div>
+
+      <div class="form-group">
+        <label for="consult-phone">Номер телефона *</label>
+        <input type="tel" id="consult-phone" class="toon-input" placeholder="+7 (___) ___-__-__" maxlength="18" required autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label for="consult-car">Марка и модель авто</label>
+        <input type="text" id="consult-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70">
+      </div>
+
+      <div class="form-group">
+        <label for="consult-desc">Опишите задачу или задумку *</label>
+        <textarea id="consult-desc" class="toon-input" rows="3" placeholder="Хочу напечатать рисунок на капот и борта / посоветоваться по состоянию ЛКП..." maxlength="500" required></textarea>
+        <small style="color: var(--color-muted); font-size: 11px; margin-top: 2px;">
+          💡 Можно указать ваш ник в <b>Telegram</b> или <b>VK</b> для быстрой связи в чате.
+        </small>
+      </div>
+
+      <div style="margin-top: 18px;">
+        <button type="submit" class="toon-btn toon-btn--accent" style="width: 100%; font-size: 15px; padding: 14px;">
+          ОТПРАВИТЬ МАСТЕРУ НА ОЦЕНКУ 🎨
+        </button>
+      </div>
+    </form>
+
+    <div id="consult-success" style="display: none; text-align: center; padding: 16px 10px;">
+      <div style="font-size: 48px; margin-bottom: 12px;">🤝</div>
+      <h3 style="margin: 0 0 8px; text-transform: uppercase;">Запрос принят!</h3>
+      <p style="color: var(--color-muted); font-size: 14px; line-height: 1.5; margin: 0 0 20px;">
+        Мастер свяжется с вами, чтобы обсудить задумку, сориентировать по времени и рассчитать индивидуальный проект.
+      </p>
+      <button type="button" class="toon-btn toon-btn--primary" id="consult-success-close-btn" style="width: 100%; padding: 12px;">
+        ОТЛИЧНО
+      </button>
+    </div>
+  </dialog>
+
+  <!-- МОДАЛЬНОЕ ОКНО ЗАЯВКИ ИЗ КАЛЬКУЛЯТОРА -->
   <dialog class="toon-modal" id="booking-modal">
     <div class="toon-modal-header">
       <h3 style="margin: 0; font-size: 20px; text-transform: uppercase;">Заявка на оклейку</h3>
@@ -252,7 +324,7 @@
     <form id="booking-form">
       <div class="form-group">
         <label for="client-name">Ваше имя *</label>
-        <input type="text" id="client-name" class="toon-input" placeholder="например, Александр" required>
+        <input type="text" id="client-name" class="toon-input" placeholder="например, Александр" maxlength="50" required>
       </div>
 
       <div class="form-group">
@@ -262,12 +334,12 @@
 
       <div class="form-group">
         <label for="client-car">Марка и модель авто *</label>
-        <input type="text" id="client-car" class="toon-input" placeholder="например, BMW M5 F90" required>
+        <input type="text" id="client-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70" required>
       </div>
 
       <div class="form-group">
         <label for="client-comment">Комментарий & альтернативная связь</label>
-        <textarea id="client-comment" class="toon-input" rows="3" placeholder="Удобная дата/время. Если удобнее Telegram или VK — укажите ваш @юзернейм или ссылку..."></textarea>
+        <textarea id="client-comment" class="toon-input" rows="3" placeholder="Удобная дата/время. Если удобнее Telegram или VK — укажите ваш @юзернейм или ссылку..." maxlength="500"></textarea>
         <small style="color: var(--color-muted); font-size: 11px; margin-top: 2px;">
           💡 Можно указать ник в <b>Telegram</b> или <b>VK</b>, если предпочитаете переписку звонку.
         </small>
@@ -511,6 +583,77 @@
       bookingSuccess.style.display = 'block';
       bookingForm.reset();
     });
+
+    // --- ЛОГИКА МОДАЛКИ КОНСУЛЬТАЦИИ С МАСТЕРОМ ---
+    const consultBtn = document.getElementById('consult-btn');
+    const consultModal = document.getElementById('consult-modal');
+    const consultCloseBtn = document.getElementById('consult-close-btn');
+    const consultSuccessCloseBtn = document.getElementById('consult-success-close-btn');
+    const consultForm = document.getElementById('consult-form');
+    const consultSuccess = document.getElementById('consult-success');
+    const consultPhone = document.getElementById('consult-phone');
+
+    if (consultBtn && consultModal) {
+      consultBtn.addEventListener('click', () => {
+        consultForm.style.display = 'block';
+        consultSuccess.style.display = 'none';
+        consultModal.showModal();
+      });
+
+      consultCloseBtn.addEventListener('click', () => consultModal.close());
+      consultSuccessCloseBtn.addEventListener('click', () => consultModal.close());
+
+      consultModal.addEventListener('click', (e) => {
+        if (e.target === consultModal) consultModal.close();
+      });
+
+      // Маска телефона для консультации
+      consultPhone.addEventListener('input', (e) => {
+        consultPhone.value = formatPhone(e.target.value.replace(/\D/g, ''));
+      });
+
+      consultPhone.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+          const cur = consultPhone.selectionStart;
+          if (cur === consultPhone.selectionEnd && cur > 0) {
+            const charBefore = consultPhone.value[cur - 1];
+            if (/\D/.test(charBefore)) {
+              e.preventDefault();
+              let val = consultPhone.value;
+              let idx = cur - 1;
+              while (idx >= 0 && /\D/.test(val[idx])) idx--;
+              if (idx >= 0 && val[idx] !== '+') {
+                consultPhone.value = formatPhone((val.slice(0, idx) + val.slice(cur)).replace(/\D/g, ''));
+              } else {
+                consultPhone.value = '';
+              }
+            }
+          }
+        }
+      });
+
+      consultForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (consultPhone.value.trim().length < 18) {
+          alert('Пожалуйста, введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+          consultPhone.focus();
+          return;
+        }
+
+        const consultData = {
+          clientName: document.getElementById('consult-name').value,
+          phone: consultPhone.value,
+          car: document.getElementById('consult-car').value,
+          description: document.getElementById('consult-desc').value,
+          type: "consultation"
+        };
+
+        console.log('Запрос на консультацию / кастом для бэкенда:', consultData);
+        consultForm.style.display = 'none';
+        consultSuccess.style.display = 'block';
+        consultForm.reset();
+      });
+    }
   </script>
 
   <!-- Подключение темы -->

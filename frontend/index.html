@@ -60,6 +60,9 @@
           <a href="calculator.html" class="toon-btn toon-btn--accent" style="font-size: 15px; padding: 12px 28px;">
             🧮 ОНЛАЙН-КАЛЬКУЛЯТОР →
           </a>
+          <button id="consult-btn" type="button" class="toon-btn toon-btn--primary" style="font-size: 15px; padding: 12px 24px;">
+            🎨 КОНСУЛЬТАЦИЯ / КАСТОМ
+          </button>
           <a href="services.html" class="toon-btn" style="font-size: 15px; padding: 12px 24px;">
             Подробнее об услугах
           </a>
@@ -180,9 +183,64 @@
 
   </main>
 
+  <!-- МОДАЛЬНОЕ ОКНО КОНСУЛЬТАЦИИ С МАСТЕРОМ -->
+  <dialog class="toon-modal" id="consult-modal">
+    <div class="toon-modal-header">
+      <h3 style="margin: 0; font-size: 20px; text-transform: uppercase;">Консультация с мастером</h3>
+      <button type="button" class="toon-modal-close" id="consult-close-btn" aria-label="Закрыть">✕</button>
+    </div>
+
+    <div style="background: var(--bg-subtle); border: var(--border-width) solid var(--color-border); border-radius: 12px; padding: 12px 16px; margin-bottom: 18px;">
+      <div style="font-size: 11px; color: var(--color-muted); font-weight: 700; text-transform: uppercase;">Бесплатная консультация</div>
+      <div style="font-size: 14px; font-weight: 800; margin-top: 2px;">Сложные проекты, рисунки на плёнке и оценка авто</div>
+    </div>
+
+    <form id="consult-form">
+      <div class="form-group">
+        <label for="consult-name">Ваше имя *</label>
+        <input type="text" id="consult-name" class="toon-input" placeholder="например, Александр" maxlength="50" required>
+      </div>
+
+      <div class="form-group">
+        <label for="consult-phone">Номер телефона *</label>
+        <input type="tel" id="consult-phone" class="toon-input" placeholder="+7 (___) ___-__-__" maxlength="18" required autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label for="consult-car">Марка и модель авто</label>
+        <input type="text" id="consult-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70">
+      </div>
+
+      <div class="form-group">
+        <label for="consult-desc">Опишите задачу или задумку *</label>
+        <textarea id="consult-desc" class="toon-input" rows="3" placeholder="Хочу напечатать рисунок на капот и борта / посоветоваться по состоянию ЛКП..." maxlength="500" required></textarea>
+        <small style="color: var(--color-muted); font-size: 11px; margin-top: 2px;">
+          💡 Можно указать ваш ник в <b>Telegram</b> или <b>VK</b> для быстрой связи в чате.
+        </small>
+      </div>
+
+      <div style="margin-top: 18px;">
+        <button type="submit" class="toon-btn toon-btn--accent" style="width: 100%; font-size: 15px; padding: 14px;">
+          ОТПРАВИТЬ МАСТЕРУ НА ОЦЕНКУ 🎨
+        </button>
+      </div>
+    </form>
+
+    <div id="consult-success" style="display: none; text-align: center; padding: 16px 10px;">
+      <div style="font-size: 48px; margin-bottom: 12px;">🤝</div>
+      <h3 style="margin: 0 0 8px; text-transform: uppercase;">Запрос принят!</h3>
+      <p style="color: var(--color-muted); font-size: 14px; line-height: 1.5; margin: 0 0 20px;">
+        Мастер свяжется с вами, чтобы обсудить задумку, сориентировать по времени и рассчитать индивидуальный проект.
+      </p>
+      <button type="button" class="toon-btn toon-btn--primary" id="consult-success-close-btn" style="width: 100%; padding: 12px;">
+        ОТЛИЧНО
+      </button>
+    </div>
+  </dialog>
+
   <!-- СКРИПТ КАРУСЕЛИ РАБОТ: СТРЕЛКИ + СВАЙПЫ + КЛИКИ -->
   <script>
-    // Данные для карусели (в будущем легко заменить на реальные фото через backend/json)
+    // Данные для карусели
     const projects = [
       {
         title: "Porsche 911 Carrera",
@@ -226,7 +284,7 @@
       }
     ];
 
-    let activeIdx = 1; // Стартуем со 2-го проекта как активного
+    let activeIdx = 1;
 
     function renderCarousel() {
       const total = projects.length;
@@ -260,7 +318,6 @@
           </div>
         `;
 
-        // Клик по боковой карточке делает её активной
         if (!isActive) {
           card.addEventListener('click', () => {
             activeIdx = idx;
@@ -272,7 +329,6 @@
       });
     }
 
-    // Кнопки влево / вправо
     document.getElementById('prev-btn').addEventListener('click', () => {
       activeIdx = (activeIdx - 1 + projects.length) % projects.length;
       renderCarousel();
@@ -283,7 +339,6 @@
       renderCarousel();
     });
 
-    // Поддержка свайпов для телефонов
     let startX = 0;
     const touchArea = document.getElementById('showcase-touch-area');
 
@@ -296,18 +351,96 @@
       const diff = startX - endX;
       if (Math.abs(diff) > 40) {
         if (diff > 0) {
-          // Свайп влево -> следующий
           activeIdx = (activeIdx + 1) % projects.length;
         } else {
-          // Свайп вправо -> предыдущий
           activeIdx = (activeIdx - 1 + projects.length) % projects.length;
         }
         renderCarousel();
       }
     }, { passive: true });
 
-    // Инициализация карусели
     renderCarousel();
+
+    // --- МОДАЛКА КОНСУЛЬТАЦИИ ---
+    function formatPhone(digits) {
+      if (!digits) return '';
+      if (digits[0] === '7' || digits[0] === '8') digits = digits.substring(1);
+      let formatted = '+7';
+      if (digits.length > 0) formatted += ' (' + digits.substring(0, 3);
+      if (digits.length >= 3) formatted += ') ' + digits.substring(3, 6);
+      if (digits.length >= 6) formatted += '-' + digits.substring(6, 8);
+      if (digits.length >= 8) formatted += '-' + digits.substring(8, 10);
+      return formatted;
+    }
+
+    const consultBtn = document.getElementById('consult-btn');
+    const consultModal = document.getElementById('consult-modal');
+    const consultCloseBtn = document.getElementById('consult-close-btn');
+    const consultSuccessCloseBtn = document.getElementById('consult-success-close-btn');
+    const consultForm = document.getElementById('consult-form');
+    const consultSuccess = document.getElementById('consult-success');
+    const consultPhone = document.getElementById('consult-phone');
+
+    if (consultBtn && consultModal) {
+      consultBtn.addEventListener('click', () => {
+        consultForm.style.display = 'block';
+        consultSuccess.style.display = 'none';
+        consultModal.showModal();
+      });
+
+      consultCloseBtn.addEventListener('click', () => consultModal.close());
+      consultSuccessCloseBtn.addEventListener('click', () => consultModal.close());
+
+      consultModal.addEventListener('click', (e) => {
+        if (e.target === consultModal) consultModal.close();
+      });
+
+      consultPhone.addEventListener('input', (e) => {
+        consultPhone.value = formatPhone(e.target.value.replace(/\D/g, ''));
+      });
+
+      consultPhone.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+          const cur = consultPhone.selectionStart;
+          if (cur === consultPhone.selectionEnd && cur > 0) {
+            const charBefore = consultPhone.value[cur - 1];
+            if (/\D/.test(charBefore)) {
+              e.preventDefault();
+              let val = consultPhone.value;
+              let idx = cur - 1;
+              while (idx >= 0 && /\D/.test(val[idx])) idx--;
+              if (idx >= 0 && val[idx] !== '+') {
+                consultPhone.value = formatPhone((val.slice(0, idx) + val.slice(cur)).replace(/\D/g, ''));
+              } else {
+                consultPhone.value = '';
+              }
+            }
+          }
+        }
+      });
+
+      consultForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (consultPhone.value.trim().length < 18) {
+          alert('Пожалуйста, введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+          consultPhone.focus();
+          return;
+        }
+
+        const consultData = {
+          clientName: document.getElementById('consult-name').value,
+          phone: consultPhone.value,
+          car: document.getElementById('consult-car').value,
+          description: document.getElementById('consult-desc').value,
+          type: "consultation"
+        };
+
+        console.log('Запрос на консультацию / кастом с главной страницы:', consultData);
+        consultForm.style.display = 'none';
+        consultSuccess.style.display = 'block';
+        consultForm.reset();
+      });
+    }
   </script>
   <!-- Подключение темы -->
   <script src="theme.js"></script>
