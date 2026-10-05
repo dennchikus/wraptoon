@@ -1,4 +1,3 @@
-
 from src.api.dependencies import get_db_manager
 from src.schemas.details import RequestAddDetails
 from src.schemas.services import RequestAddService
