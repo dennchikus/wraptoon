@@ -1,20 +1,20 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 
-class RequestAddOrders(BaseModel):
+class RequestAddOrder(BaseModel):
     client_name: str
     client_number: str
     client_car: str
-    client_comment: str | None = None
+    client_comment: str | None = Field(None)
     price: int
-    id_service_details: int
-    status: str = "New"
+    ids_service_details: str
 
-class Orders(RequestAddOrders):
+class Order(RequestAddOrder):
     id: int
+    status: str = "new"
     created_at: datetime
 
-class PATCHOrders(BaseModel):
+class PATCHOrder(BaseModel):
     client_name: str | None = Field(default=None)
     client_number: str | None = Field(default=None)
     client_car: str | None = Field(default=None)

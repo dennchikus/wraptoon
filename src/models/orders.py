@@ -11,8 +11,8 @@ class OrdersORM(Base):
     client_name: Mapped[str] = mapped_column(String(length=50))
     client_number: Mapped[str] = mapped_column(String(length=20))
     client_car: Mapped[str] = mapped_column(String(length=50))
-    client_comment: Mapped[str] = mapped_column(String(length=500))
+    client_comment: Mapped[str] = mapped_column(String(length=500), nullable=True)
     price: Mapped[int]
     ids_service_details: Mapped[str] = mapped_column(String(length=100))
-    status: Mapped[str] = mapped_column(String, default="pending")
+    status: Mapped[str] = mapped_column(String, default="new")
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Query
 
 from src.api.dependencies import DBDep
-from src.schemas.orders import RequestAddOrders, PATCHOrders
+from src.schemas.orders import RequestAddOrder, PATCHOrder
 
 router = APIRouter(
     prefix="/orders",
@@ -27,7 +27,7 @@ async def get_all_orders(
 
 async def add_order(
         db: DBDep,
-        data: RequestAddOrders
+        data: RequestAddOrder
 ):
     result = await db.orders.add(data=data)
     await db.commit()
@@ -46,7 +46,7 @@ async def add_order(
 async def full_update_order(
         db: DBDep,
         order_id: int,
-        data: RequestAddOrders
+        data: RequestAddOrder
 ):
     await db.orders.edit(id=order_id, data=data)
     await db.commit()
@@ -62,9 +62,10 @@ async def full_update_order(
 async def partially_update_order(
     db: DBDep,
     order_id: int,
-    data: PATCHOrders
+    data: PATCHOrder
 ):
     await db.orders.edit(data=data, is_patch=True, id=order_id)
+    await db.commit()
     return {"status": "OK"}
 
 @router.delete(
@@ -79,4 +80,5 @@ async def delete_order(
 ):
 
     await db.orders.delete(id=order_id)
+    await db.commit()
     return {"status": "OK"}
