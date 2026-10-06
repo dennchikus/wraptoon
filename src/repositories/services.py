@@ -5,4 +5,3 @@ from src.schemas.services import Service
 class ServicesRepository(BaseRepository):
     model = ServicesORM
     schema = Service
-

@@ -1,6 +1,7 @@
 from src.repositories.details import DetailsRepository
 from src.repositories.services import ServicesRepository
 from src.repositories.services_details import ServicesDetailsRepository
+from src.repositories.orders import OrdersRepository
 
 class DBManager():
     def __init__(self, session_factory):
@@ -12,6 +13,7 @@ class DBManager():
         self.services = ServicesRepository(self.session)
         self.details = DetailsRepository(self.session)
         self.services_details = ServicesDetailsRepository(self.session)
+        self.orders = OrdersRepository(self.session)
 
         return self
 

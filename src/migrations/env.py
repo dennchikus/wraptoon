@@ -12,6 +12,7 @@ from src.database import Base
 from src.models.details import DetailsORM
 from src.models.services import ServicesORM
 from src.models.services_details import ServicesDetailsORM
+from src.models.orders import OrdersORM
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
