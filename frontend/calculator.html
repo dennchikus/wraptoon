@@ -271,7 +271,7 @@
 
       <div class="form-group">
         <label for="consult-car">Марка и модель авто</label>
-        <input type="text" id="consult-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70">
+        <input type="text" id="consult-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70" autocomplete="off">
       </div>
 
       <div class="form-group">
@@ -334,7 +334,7 @@
 
       <div class="form-group">
         <label for="client-car">Марка и модель авто *</label>
-        <input type="text" id="client-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70" required>
+        <input type="text" id="client-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70" required autocomplete="off">
       </div>
 
       <div class="form-group">
@@ -656,7 +656,8 @@
     }
   </script>
 
-  <!-- Подключение темы -->
+  <!-- Подключение автокомплита авто и темы -->
+  <script src="cars-autocomplete.js"></script>
   <script src="theme.js"></script>
 </body>
 </html>
