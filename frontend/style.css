@@ -1,0 +1,780 @@
+/* Подключение шрифтов: Rubik (мягкий мультяшный гротеск со скруглениями) и Unbounded (дерзкие заголовки) */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap');
+
+:root {
+  /* --- СВЕТЛАЯ ТЕМА (TOON LIGHT) --- */
+  --bg-page: #FAF6ED;
+  --bg-card: #FFFFFF;
+  --bg-subtle: #FFFBEB;
+  --color-border: #18181B;
+  --color-primary: #F7C642;
+  --color-accent: #FF5A36;
+  --color-text: #18181B;
+  --color-muted: #71717A;
+
+  /* Шрифты */
+  --font-base: 'Rubik', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Unbounded', 'Rubik', sans-serif;
+
+  /* Геометрия необрутализма */
+  --border-width: 2px;
+  --radius-card: 16px;
+  --radius-pill: 9999px;
+  --shadow-color: #18181B;
+  --shadow-offset: 3px 3px 0px var(--shadow-color);
+  --shadow-hover: 1px 1px 0px var(--shadow-color);
+}
+
+/* --- ТЁМНАЯ ТЕМА (CYBER TOON DARK) --- */
+[data-theme="dark"] {
+  --bg-page: #121215;
+  --bg-card: #1C1C22;
+  --bg-subtle: #25252E;
+  --color-border: #3F3F46; /* Спокойный матовый графитовый контур вместо ядерного */
+  --color-primary: #F7C642;
+  --color-accent: #FF5A36;
+  --color-text: #F4F4F6;
+  --color-muted: #9CA3AF;
+  --shadow-color: #000000;
+  --shadow-offset: 3px 3px 0px var(--shadow-color);
+  --shadow-hover: 1px 1px 0px var(--shadow-color);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, button, input, select, textarea, label, span, p, a, div {
+  font-family: var(--font-base);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 60px;
+  background-color: var(--bg-page);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4, .hero-title {
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.5px;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 32px auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Карточки */
+.toon-card {
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-offset);
+  padding: 24px;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Кнопки и плашки */
+.toon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-offset);
+  padding: 10px 20px;
+  background: var(--bg-card);
+  color: var(--color-text);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+.toon-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.toon-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+.toon-btn--primary {
+  background: var(--color-primary);
+  color: #18181B;
+}
+
+.toon-btn--accent {
+  background: var(--color-accent);
+  color: #FFFFFF;
+}
+
+.toon-chip {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.toon-chip.is-active {
+  background: var(--color-primary);
+  color: #18181B;
+}
+
+/* Строки с чекбоксами для калькулятора (Интерактивные карточки-плитки) */
+.toon-checkbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  color: var(--color-text);
+  cursor: pointer;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  margin-bottom: 10px;
+  user-select: none;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease, border-color 0.15s ease;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.toon-checkbox-row:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px var(--shadow-color);
+}
+
+/* Скрываем сам чекбокс — вся карточка работает как переключатель */
+.toon-checkbox-row input[type="checkbox"] {
+  display: none;
+}
+
+/* КОГДА БЛОК ВЫБРАН (АКТИВНАЯ ПЛИТКА) */
+.toon-checkbox-row:has(input[type="checkbox"]:checked),
+.toon-checkbox-row.is-selected {
+  background: #FEF3C7; /* Тёплый солнечный фон */
+  border-color: #18181B;
+  box-shadow: 1px 1px 0px var(--shadow-color);
+  transform: translate(2px, 2px);
+  font-weight: 700;
+}
+
+/* Активное состояние в тёмной теме */
+[data-theme="dark"] .toon-checkbox-row:has(input[type="checkbox"]:checked),
+[data-theme="dark"] .toon-checkbox-row.is-selected {
+  background: #2D2717; /* Тёплый графитово-золотистый цвет */
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary), 1px 1px 0px #000000;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* Степпер выбора количества (Двери, Стёкла, Стойки) */
+.stepper-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  padding: 3px 8px;
+  box-shadow: 1px 1px 0px var(--shadow-color);
+  user-select: none;
+  margin-left: 12px;
+}
+
+.stepper-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: var(--border-width) solid var(--color-border);
+  background: var(--color-primary);
+  color: #18181B;
+  font-size: 15px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  transition: transform 0.1s ease;
+}
+
+.stepper-btn:hover {
+  transform: scale(1.1);
+}
+
+.stepper-btn:active {
+  transform: scale(0.9);
+}
+
+.stepper-count {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 13px;
+  min-width: 16px;
+  text-align: center;
+  color: var(--color-text);
+}
+
+/* Контейнер всей шапки */
+.toon-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background-color: var(--bg-page);
+  border-bottom: var(--border-width) solid var(--color-border);
+  box-sizing: border-box;
+  width: 100%;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Логотип */
+.toon-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #18181B;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.logo-text strong {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  font-weight: 900;
+}
+
+.logo-text small {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--color-muted);
+}
+
+/* Навигационные ссылки */
+.toon-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 700;
+  transition: color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+/* Правый блок действий */
+.toon-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Кнопка переключения темы */
+.theme-toggle-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: var(--border-width) solid var(--color-border);
+  background: var(--bg-card);
+  color: var(--color-text);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.theme-toggle-btn:hover {
+  transform: translate(1px, 1px);
+  background: var(--bg-subtle);
+}
+
+.theme-toggle-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Желтая кнопка "Занять бокс" */
+.toon-btn-book {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #18181B;
+  background: var(--color-primary);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-pill);
+  box-shadow: 3px 3px 0 var(--shadow-color);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.toon-btn-book:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--shadow-color);
+}
+
+.toon-btn-book:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
+/* Раскрывающиеся секции (Аккордеон) */
+.toon-accordion {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  margin-bottom: 16px;
+  background: var(--bg-card);
+  overflow: hidden;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  transition: all 0.2s ease;
+}
+
+.toon-accordion[open] {
+  box-shadow: var(--shadow-offset);
+}
+
+.toon-accordion-header {
+  padding: 16px 20px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-subtle);
+  color: var(--color-text);
+  user-select: none;
+  list-style: none;
+}
+
+.toon-accordion-header::-webkit-details-marker {
+  display: none;
+}
+
+.toon-accordion-header::after {
+  content: '▼';
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.toon-accordion[open] .toon-accordion-header::after {
+  transform: rotate(180deg);
+}
+
+.toon-accordion-content {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+/* --- HERO СЕКЦИЯ С ЛОГОТИПОМ И ОПИСАНИЕМ --- */
+.toon-hero {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  padding: 36px;
+  background: var(--bg-subtle);
+}
+
+.hero-logo-box {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  background: var(--color-primary);
+  color: #18181B;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 24px;
+  box-shadow: 5px 5px 0px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-logo-box .hero-icon {
+  font-size: 52px;
+  line-height: 1;
+}
+
+.hero-logo-box span {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.hero-desc {
+  margin: 0;
+  font-size: 16px;
+  color: var(--color-muted);
+  line-height: 1.5;
+  max-width: 650px;
+}
+
+/* --- КАРУСЕЛЬ РАБОТ --- */
+.showcase-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.showcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.showcase-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 24px 0;
+}
+
+.showcase-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.showcase-card {
+  flex: 0 0 320px;
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-offset);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.showcase-card.is-side {
+  transform: scale(0.9);
+  opacity: 0.65;
+  cursor: pointer;
+}
+
+.showcase-card.is-side:hover {
+  opacity: 0.9;
+  transform: scale(0.93);
+}
+
+.showcase-card.is-active {
+  flex: 0 0 380px;
+  transform: scale(1.04);
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  z-index: 2;
+}
+
+.showcase-img-placeholder {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  border-bottom: var(--border-width) solid var(--color-border);
+  position: relative;
+}
+
+.showcase-info {
+  padding: 16px 20px;
+}
+
+.showcase-info h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.showcase-info p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.showcase-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: var(--border-width) solid var(--color-border);
+  background: var(--bg-card);
+  color: var(--color-text);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+}
+
+.showcase-nav-btn:hover {
+  background: var(--color-primary);
+  color: #18181B;
+  transform: translate(1px, 1px);
+}
+
+.showcase-nav-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Адаптив для телефонов и планшетов */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 14px;
+    margin: 18px auto;
+    gap: 18px;
+  }
+
+  .toon-header {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* На мобильных навигация аккуратно выстраивается в горизонтальную прокрутку */
+  .toon-nav {
+    order: 3;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-link {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--bg-card);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+    box-shadow: 1px 1px 0px var(--shadow-color);
+  }
+
+  .toon-hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  .hero-logo-box {
+    width: 100px;
+    height: 100px;
+    border-radius: 18px;
+  }
+
+  .hero-logo-box .hero-icon {
+    font-size: 38px;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .showcase-card {
+    flex: 0 0 240px;
+  }
+
+  .showcase-card.is-active {
+    flex: 0 0 270px;
+  }
+
+  .toon-checkbox-row {
+    padding: 12px 14px;
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .toon-modal {
+    padding: 20px 16px;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+}
+
+
+/* --- МОДАЛЬНОЕ ОКНО ЗАЯВКИ --- */
+.toon-modal {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+  color: var(--color-text);
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  max-width: 480px;
+  width: 92%;
+  padding: 28px;
+  margin: auto;
+  position: fixed;
+  inset: 0;
+  outline: none;
+}
+
+.toon-modal::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.toon-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.toon-modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: var(--border-width) solid var(--color-border);
+  background: var(--bg-subtle);
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.toon-modal-close:hover {
+  background: var(--color-accent);
+  color: #FFFFFF;
+  transform: scale(1.1);
+}
+
+.modal-summary-box {
+  background: var(--bg-subtle);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Стилизация полей ввода формы */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.toon-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 10px;
+  background: var(--bg-page);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  box-shadow: 2px 2px 0px var(--shadow-color);
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.toon-input:focus {
+  background: var(--bg-card);
+  border-color: var(--color-primary);
+  box-shadow: 3px 3px 0px var(--shadow-color);
+}
+
+
+/* Фиксируем размер текстовых полей, запрещая растягивание за пределы окна */
+textarea.toon-input {
+  resize: none;
+  min-height: 80px;
+  max-height: 120px;
+}

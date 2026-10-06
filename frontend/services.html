@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WRAP TOON — Услуги & Материалы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="toon-header">
+    <a href="index.html" class="toon-logo">
+      <span class="logo-icon">🅤</span>
+      <div class="logo-text">
+        <strong>WRAP TOON</strong>
+        <small>• EST. 2026 GARAGE •</small>
+      </div>
+    </a>
+
+    <nav class="toon-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="calculator.html" class="nav-link">Калькулятор</a>
+      <a href="services.html" class="nav-link active" style="text-decoration: underline; font-weight: 800;">Услуги</a>
+      <a href="about.html" class="nav-link">О гараже</a>
+    </nav>
+
+    <div class="toon-header-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
+      <a href="calculator.html" class="toon-btn-book">
+        ЗАНЯТЬ БОКС
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toon-card">
+      <h2 style="margin-top: 0; text-transform: uppercase;">Наши услуги и материалы</h2>
+      <p style="color: var(--color-muted); margin-bottom: 24px;">Используем только сертифицированные плёнки премиум-сегмента (SunTek, Llumar, Stek, Oracal).</p>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="border-left: 4px solid var(--color-primary); padding-left: 16px;">
+          <h3 style="margin: 0 0 6px;">🛡 Антигравийная защита (Полиуретан PPF)</h3>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4B5563;">
+            Толщина пленки 190–210 микрон. Защищает кузов от сколов, летящих камней, притёртостей и химии. Имеет гидрофобный слой и эффект самозатягивания царапин при нагреве солнцем или тёплой водой.
+          </p>
+        </div>
+
+        <div style="border-left: 4px solid var(--color-accent); padding-left: 16px;">
+          <h3 style="margin: 0 0 6px;">🎨 Стайлинг и смена цвета (Винил)</h3>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4B5563;">
+            Более 300 оттенков: ультра-глянец, матовый сатин, металлик, хамелеон и текстурный карбон. Преображает внешний вид авто и защищает родной лак от выгорания на солнце.
+          </p>
+        </div>
+
+        <div style="border-left: 4px solid #18181B; padding-left: 16px;">
+          <h3 style="margin: 0 0 6px;">🕶 Тонирование и бронь стёкол</h3>
+          <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4B5563;">
+            Атермальная тонировка по ГОСТу, евротонирование (задняя полусфера 5%/15%), а также бронирование лобового стекла пленкой ClearPlex от сколов и трещин.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 32px; text-align: center;">
+        <a href="calculator.html" class="toon-btn toon-btn--primary" style="font-size: 16px; padding: 14px 28px;">
+          Перейти к расчёту в калькулятор →
+        </a>
+      </div>
+    </div>
+  </main>
+  <!-- Подключение темы -->
+  <script src="theme.js"></script>
+</body>
+</html>

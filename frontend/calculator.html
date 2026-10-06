@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WRAP TOON — Калькулятор оклейки</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ШАПКА -->
+  <header class="toon-header">
+    <a href="index.html" class="toon-logo">
+      <span class="logo-icon">🅤</span>
+      <div class="logo-text">
+        <strong>WRAP TOON</strong>
+        <small>• EST. 2026 GARAGE •</small>
+      </div>
+    </a>
+
+    <nav class="toon-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="calculator.html" class="nav-link active" style="text-decoration: underline; font-weight: 800;">Калькулятор</a>
+      <a href="services.html" class="nav-link">Услуги</a>
+      <a href="about.html" class="nav-link">О гараже</a>
+    </nav>
+
+    <div class="toon-header-actions">
+      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
+      <a href="#total-block" class="toon-btn-book">
+        ЗАНЯТЬ БОКС
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toon-card">
+      <h2 style="margin-top: 0; text-transform: uppercase;">Калькулятор оклейки</h2>
+      <p style="color: var(--color-muted); margin-bottom: 24px;">Выберите нужные категории и детали для точного расчёта стоимости</p>
+
+      <!-- 1. ВИНИЛ (СМЕНА ЦВЕТА) -->
+      <details class="toon-accordion">
+        <summary class="toon-accordion-header">
+          <span>🎨 Виниловая плёнка (смена цвета)</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Капот</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Бампер передний</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Бампер задний</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Винил">
+            <span>Передние крылья (комплект)</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Винил">
+            <span>Задние крылья (комплект)</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
+            <span>Крыша</span>
+            <span style="font-weight: 700;">20 000 ₽</span>
+          </div>
+          
+          <!-- ДВЕРИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="12000" data-count="1" data-max="4" data-service="Винил">
+            <div style="display: flex; align-items: center;">
+              <span>Двери</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="12000" style="font-weight: 700;">12 000 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="8000" data-service="Винил">
+            <span>Крышка багажника</span>
+            <span style="font-weight: 700;">8 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Винил">
+            <span>Стойки лобового стекла</span>
+            <span style="font-weight: 700;">3 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2. ПОЛИУРЕТАН (БРОНЯ) -->
+      <details class="toon-accordion">
+        <summary class="toon-accordion-header">
+          <span>🛡 Защитный полиуретан (броня PPF)</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Капот</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Бампер передний</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Бампер задний</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан">
+            <span>Передние крылья (комплект)</span>
+            <span style="font-weight: 700;">15 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан">
+            <span>Задние крылья (комплект)</span>
+            <span style="font-weight: 700;">15 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+            <span>Крыша</span>
+            <span style="font-weight: 700;">17 000 ₽</span>
+          </div>
+
+          <!-- ДВЕРИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="10000" data-count="1" data-max="4" data-service="Полиуретан">
+            <div style="display: flex; align-items: center;">
+              <span>Двери</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="10000" style="font-weight: 700;">10 000 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Полиуретан">
+            <span>Крышка багажника</span>
+            <span style="font-weight: 700;">6 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="4000" data-service="Полиуретан">
+            <span>Фары передние</span>
+            <span style="font-weight: 700;">4 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Полиуретан">
+            <span>Фары задние</span>
+            <span style="font-weight: 700;">3 000 ₽</span>
+          </div>
+
+          <!-- ГЛЯНЦЕВЫЕ СТОЙКИ (СО СТЕППЕРОМ ДО 6 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="6000" data-count="1" data-max="6" data-service="Полиуретан">
+            <div style="display: flex; align-items: center;">
+              <span>Глянцевые стойки</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="6000" style="font-weight: 700;">6 000 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полиуретан">
+            <span>Стойки лобового стекла</span>
+            <span style="font-weight: 700;">2 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. ТОНИРОВКА И СТЕКЛА -->
+      <details class="toon-accordion">
+        <summary class="toon-accordion-header">
+          <span>🕶 Тонировка и стёкла</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="14000" data-service="Броня">
+            <span>Бронирование лобового стекла (ClearPlex от сколов)</span>
+            <span style="font-weight: 700;">14 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Тонировка">
+            <span>Лобовое стекло (Тонировка)</span>
+            <span style="font-weight: 700;">6 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="5000" data-service="Тонировка">
+            <span>Заднее стекло (Тонировка)</span>
+            <span style="font-weight: 700;">5 000 ₽</span>
+          </div>
+
+          <!-- БОКОВЫЕ СТЕКЛА (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="2500" data-count="1" data-max="4" data-service="Тонировка">
+            <div style="display: flex; align-items: center;">
+              <span>Боковые стёкла (Тонировка)</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="2500" style="font-weight: 700;">2 500 ₽</span>
+          </div>
+
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Тонировка">
+            <span>Фары передние (Тонировка)</span>
+            <span style="font-weight: 700;">3 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Тонировка">
+            <span>Фары задние (Тонировка)</span>
+            <span style="font-weight: 700;">2 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- ИТОГОВЫЙ БЛОК -->
+      <div id="total-block" style="margin-top: 32px; padding-top: 20px; border-top: 2px dashed var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <div style="font-size: 13px; color: var(--color-muted); font-weight: 600;">ИТОГО К ОПЛАТЕ:</div>
+          <div id="total-price" style="font-size: 36px; font-weight: 900; color: var(--color-border);">0 ₽</div>
+        </div>
+        <button id="book-btn" class="toon-btn toon-btn--primary" style="font-size: 16px; padding: 14px 28px;">
+          ЗАБРОНИРОВАТЬ →
+        </button>
+      </div>
+
+    </div>
+
+    <!-- БАННЕР НЕСТАНДАРТНОГО ПРОЕКТА / КОНСУЛЬТАЦИИ -->
+    <div class="toon-card" style="background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 24px;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+          <span class="toon-chip is-active" style="font-size: 11px;">🎨 ИНДИВИДУАЛЬНЫЙ ДИЗАЙН</span>
+          <span style="font-size: 14px; font-weight: 800; text-transform: uppercase;">Сложный проект или рисунок на авто?</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: var(--color-muted); max-width: 650px; line-height: 1.4;">
+          Винилография, печать авторских рисунков на плёнке, брендирование или нестандартные элементы. Обсудите вашу задумку напрямую с мастером.
+        </p>
+      </div>
+      <button id="consult-btn" type="button" class="toon-btn toon-btn--accent" style="padding: 12px 24px; font-size: 14px;">
+        ОБСУДИТЬ С МАСТЕРОМ →
+      </button>
+    </div>
+
+  </main>
+
+  <!-- МОДАЛЬНОЕ ОКНО КОНСУЛЬТАЦИИ -->
+  <dialog class="toon-modal" id="consult-modal">
+    <div class="toon-modal-header">
+      <h3 style="margin: 0; font-size: 20px; text-transform: uppercase;">Консультация с мастером</h3>
+      <button type="button" class="toon-modal-close" id="consult-close-btn" aria-label="Закрыть">✕</button>
+    </div>
+
+    <div style="background: var(--bg-subtle); border: var(--border-width) solid var(--color-border); border-radius: 12px; padding: 12px 16px; margin-bottom: 18px;">
+      <div style="font-size: 11px; color: var(--color-muted); font-weight: 700; text-transform: uppercase;">Бесплатная консультация</div>
+      <div style="font-size: 14px; font-weight: 800; margin-top: 2px;">Сложные проекты, рисунки на плёнке и оценка авто</div>
+    </div>
+
+    <form id="consult-form">
+      <div class="form-group">
+        <label for="consult-name">Ваше имя *</label>
+        <input type="text" id="consult-name" class="toon-input" placeholder="например, Александр" maxlength="50" required>
+      </div>
+
+      <div class="form-group">
+        <label for="consult-phone">Номер телефона *</label>
+        <input type="tel" id="consult-phone" class="toon-input" placeholder="+7 (___) ___-__-__" maxlength="18" required autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label for="consult-car">Марка и модель авто</label>
+        <input type="text" id="consult-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70">
+      </div>
+
+      <div class="form-group">
+        <label for="consult-desc">Опишите задачу или задумку *</label>
+        <textarea id="consult-desc" class="toon-input" rows="3" placeholder="Хочу напечатать рисунок на капот и борта / посоветоваться по состоянию ЛКП..." maxlength="500" required></textarea>
+        <small style="color: var(--color-muted); font-size: 11px; margin-top: 2px;">
+          💡 Можно указать ваш ник в <b>Telegram</b> или <b>VK</b> для быстрой связи в чате.
+        </small>
+      </div>
+
+      <div style="margin-top: 18px;">
+        <button type="submit" class="toon-btn toon-btn--accent" style="width: 100%; font-size: 15px; padding: 14px;">
+          ОТПРАВИТЬ МАСТЕРУ НА ОЦЕНКУ 🎨
+        </button>
+      </div>
+    </form>
+
+    <div id="consult-success" style="display: none; text-align: center; padding: 16px 10px;">
+      <div style="font-size: 48px; margin-bottom: 12px;">🤝</div>
+      <h3 style="margin: 0 0 8px; text-transform: uppercase;">Запрос принят!</h3>
+      <p style="color: var(--color-muted); font-size: 14px; line-height: 1.5; margin: 0 0 20px;">
+        Мастер свяжется с вами, чтобы обсудить задумку, сориентировать по времени и рассчитать индивидуальный проект.
+      </p>
+      <button type="button" class="toon-btn toon-btn--primary" id="consult-success-close-btn" style="width: 100%; padding: 12px;">
+        ОТЛИЧНО
+      </button>
+    </div>
+  </dialog>
+
+  <!-- МОДАЛЬНОЕ ОКНО ЗАЯВКИ ИЗ КАЛЬКУЛЯТОРА -->
+  <dialog class="toon-modal" id="booking-modal">
+    <div class="toon-modal-header">
+      <h3 style="margin: 0; font-size: 20px; text-transform: uppercase;">Заявка на оклейку</h3>
+      <button type="button" class="toon-modal-close" id="modal-close-btn" aria-label="Закрыть">✕</button>
+    </div>
+
+    <!-- Сводка по выбранным услугам -->
+    <div class="modal-summary-box">
+      <div>
+        <div style="font-size: 11px; color: var(--color-muted); font-weight: 700; text-transform: uppercase;">Выбрано позиций:</div>
+        <div id="modal-items-count" style="font-size: 15px; font-weight: 800;">0 деталей</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 11px; color: var(--color-muted); font-weight: 700; text-transform: uppercase;">Итоговая смета:</div>
+        <div id="modal-total-price" style="font-size: 18px; font-weight: 900; color: var(--color-primary);">0 ₽</div>
+      </div>
+    </div>
+
+    <!-- Форма контактов -->
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="client-name">Ваше имя *</label>
+        <input type="text" id="client-name" class="toon-input" placeholder="например, Александр" maxlength="50" required>
+      </div>
+
+      <div class="form-group">
+        <label for="client-phone">Номер телефона *</label>
+        <input type="tel" id="client-phone" class="toon-input" placeholder="+7 (___) ___-__-__" maxlength="18" required autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label for="client-car">Марка и модель авто *</label>
+        <input type="text" id="client-car" class="toon-input" placeholder="например, BMW M5 F90" maxlength="70" required>
+      </div>
+
+      <div class="form-group">
+        <label for="client-comment">Комментарий & альтернативная связь</label>
+        <textarea id="client-comment" class="toon-input" rows="3" placeholder="Удобная дата/время. Если удобнее Telegram или VK — укажите ваш @юзернейм или ссылку..." maxlength="500"></textarea>
+        <small style="color: var(--color-muted); font-size: 11px; margin-top: 2px;">
+          💡 Можно указать ник в <b>Telegram</b> или <b>VK</b>, если предпочитаете переписку звонку.
+        </small>
+      </div>
+
+      <div style="margin-top: 18px;">
+        <button type="submit" class="toon-btn toon-btn--primary" style="width: 100%; font-size: 15px; padding: 14px;">
+          ОТПРАВИТЬ ЗАЯВКУ МАСТЕРУ 🚀
+        </button>
+      </div>
+    </form>
+
+    <!-- Экран успешной отправки -->
+    <div id="booking-success" style="display: none; text-align: center; padding: 16px 10px;">
+      <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+      <h3 style="margin: 0 0 8px; text-transform: uppercase;">Заявка принята!</h3>
+      <p style="color: var(--color-muted); font-size: 14px; line-height: 1.5; margin: 0 0 20px;">
+        Мастер свяжется с вами по указанному телефону для согласования точного времени и бокса.
+      </p>
+      <button type="button" class="toon-btn toon-btn--accent" id="success-close-btn" style="width: 100%; padding: 12px;">
+        ОТЛИЧНО
+      </button>
+    </div>
+  </dialog>
+
+  <!-- СКРИПТ КАЛЬКУЛЯТОРА И СТЕППЕРОВ -->
+  <script>
+    const items = document.querySelectorAll('.calc-item');
+    const totalPriceEl = document.getElementById('total-price');
+    const bookBtn = document.getElementById('book-btn');
+    const modal = document.getElementById('booking-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalItemsCount = document.getElementById('modal-items-count');
+    const modalTotalPrice = document.getElementById('modal-total-price');
+    const bookingForm = document.getElementById('booking-form');
+    const bookingSuccess = document.getElementById('booking-success');
+    const successCloseBtn = document.getElementById('success-close-btn');
+
+    function formatNumber(num) {
+      return num.toLocaleString('ru-RU') + ' ₽';
+    }
+
+    function calculateTotal() {
+      let total = 0;
+      let countSelected = 0;
+      items.forEach(item => {
+        if (item.classList.contains('is-selected')) {
+          const basePrice = parseInt(item.dataset.price, 10) || 0;
+          const count = parseInt(item.dataset.count, 10) || 1;
+          total += basePrice * count;
+          countSelected += count;
+        }
+      });
+      totalPriceEl.textContent = formatNumber(total);
+      return { total, countSelected };
+    }
+
+    items.forEach(item => {
+      const isCounter = item.dataset.type === 'counter';
+
+      if (!isCounter) {
+        item.addEventListener('click', () => {
+          item.classList.toggle('is-selected');
+          calculateTotal();
+        });
+      } else {
+        const minusBtn = item.querySelector('.minus-btn');
+        const plusBtn = item.querySelector('.plus-btn');
+        const countEl = item.querySelector('.stepper-count');
+        const priceEl = item.querySelector('.item-price');
+        const stepper = item.querySelector('.stepper-controls');
+        const basePrice = parseInt(item.dataset.price, 10) || 0;
+        const max = parseInt(item.dataset.max, 10) || 4;
+
+        item.addEventListener('click', (e) => {
+          if (e.target.closest('.stepper-btn')) return;
+
+          if (item.classList.contains('is-selected')) {
+            item.classList.remove('is-selected');
+            stepper.style.display = 'none';
+            item.dataset.count = 0;
+          } else {
+            item.classList.add('is-selected');
+            stepper.style.display = 'inline-flex';
+            item.dataset.count = 1;
+            countEl.textContent = '1';
+            priceEl.textContent = formatNumber(basePrice * 1);
+          }
+          calculateTotal();
+        });
+
+        minusBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let count = parseInt(item.dataset.count, 10) || 1;
+          count -= 1;
+          if (count < 1) {
+            item.classList.remove('is-selected');
+            stepper.style.display = 'none';
+            item.dataset.count = 0;
+          } else {
+            item.dataset.count = count;
+            countEl.textContent = count;
+            priceEl.textContent = formatNumber(basePrice * count);
+          }
+          calculateTotal();
+        });
+
+        plusBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let count = parseInt(item.dataset.count, 10) || 1;
+          if (count < max) {
+            count += 1;
+            item.dataset.count = count;
+            countEl.textContent = count;
+            priceEl.textContent = formatNumber(basePrice * count);
+            calculateTotal();
+          }
+        });
+      }
+    });
+
+    // Открытие модального окна бронирования
+    bookBtn.addEventListener('click', () => {
+      const { total, countSelected } = calculateTotal();
+      if (total === 0) {
+        alert('Пожалуйста, выберите хотя бы одну услугу или деталь для расчёта!');
+        return;
+      }
+
+      modalItemsCount.textContent = `${countSelected} шт.`;
+      modalTotalPrice.textContent = formatNumber(total);
+      bookingForm.style.display = 'block';
+      bookingSuccess.style.display = 'none';
+      modal.showModal();
+    });
+
+    // Закрытие модального окна
+    modalCloseBtn.addEventListener('click', () => modal.close());
+    successCloseBtn.addEventListener('click', () => modal.close());
+
+    // Закрытие по клику на фон
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+
+    // Маска ввода телефона: +7 (XXX) XXX-XX-XX
+    const phoneInput = document.getElementById('client-phone');
+
+    function formatPhone(digits) {
+      if (!digits) return '';
+      if (digits[0] === '7' || digits[0] === '8') {
+        digits = digits.substring(1);
+      }
+      let formatted = '+7';
+      if (digits.length > 0) {
+        formatted += ' (' + digits.substring(0, 3);
+      }
+      if (digits.length >= 3) {
+        formatted += ') ' + digits.substring(3, 6);
+      }
+      if (digits.length >= 6) {
+        formatted += '-' + digits.substring(6, 8);
+      }
+      if (digits.length >= 8) {
+        formatted += '-' + digits.substring(8, 10);
+      }
+      return formatted;
+    }
+
+    phoneInput.addEventListener('input', (e) => {
+      phoneInput.value = formatPhone(e.target.value.replace(/\D/g, ''));
+    });
+
+    // Умный Backspace: удаляет предыдущую цифру, перепрыгивая через разделители ')', '-', ' '
+    phoneInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace') {
+        const input = e.target;
+        const cur = input.selectionStart;
+
+        // Если не выделен кусок текста
+        if (cur === input.selectionEnd && cur > 0) {
+          const charBefore = input.value[cur - 1];
+
+          // Если символ перед курсором — разделитель (не цифра)
+          if (/\D/.test(charBefore)) {
+            e.preventDefault();
+            // Ищем ближайшую цифру слева
+            let val = input.value;
+            let idx = cur - 1;
+            while (idx >= 0 && /\D/.test(val[idx])) {
+              idx--;
+            }
+
+            if (idx >= 0 && val[idx] !== '+') {
+              // Удаляем именно эту цифру
+              let raw = val.slice(0, idx) + val.slice(cur);
+              input.value = formatPhone(raw.replace(/\D/g, ''));
+            } else {
+              input.value = '';
+            }
+          }
+        }
+      }
+    });
+
+    // Отправка формы заявки
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (phoneInput.value.trim().length < 18) {
+        alert('Пожалуйста, введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+        phoneInput.focus();
+        return;
+      }
+
+      // Собираем данные (в будущем отправятся на FastAPI бэкенд через fetch)
+      const selectedItems = [];
+      items.forEach(item => {
+        if (item.classList.contains('is-selected')) {
+          const name = item.querySelector('span').textContent.trim();
+          const service = item.dataset.service;
+          const count = parseInt(item.dataset.count, 10) || 1;
+          const price = (parseInt(item.dataset.price, 10) || 0) * count;
+          selectedItems.push({ service, name, count, price });
+        }
+      });
+
+      const orderData = {
+        clientName: document.getElementById('client-name').value,
+        phone: document.getElementById('client-phone').value,
+        car: document.getElementById('client-car').value,
+        comment: document.getElementById('client-comment').value,
+        items: selectedItems,
+        total: calculateTotal().total
+      };
+
+      console.log('Готовый заказ для бэкенда FastAPI:', orderData);
+
+      // Переключаем на экран успеха
+      bookingForm.style.display = 'none';
+      bookingSuccess.style.display = 'block';
+      bookingForm.reset();
+    });
+
+    // --- ЛОГИКА МОДАЛКИ КОНСУЛЬТАЦИИ С МАСТЕРОМ ---
+    const consultBtn = document.getElementById('consult-btn');
+    const consultModal = document.getElementById('consult-modal');
+    const consultCloseBtn = document.getElementById('consult-close-btn');
+    const consultSuccessCloseBtn = document.getElementById('consult-success-close-btn');
+    const consultForm = document.getElementById('consult-form');
+    const consultSuccess = document.getElementById('consult-success');
+    const consultPhone = document.getElementById('consult-phone');
+
+    if (consultBtn && consultModal) {
+      consultBtn.addEventListener('click', () => {
+        consultForm.style.display = 'block';
+        consultSuccess.style.display = 'none';
+        consultModal.showModal();
+      });
+
+      consultCloseBtn.addEventListener('click', () => consultModal.close());
+      consultSuccessCloseBtn.addEventListener('click', () => consultModal.close());
+
+      consultModal.addEventListener('click', (e) => {
+        if (e.target === consultModal) consultModal.close();
+      });
+
+      // Маска телефона для консультации
+      consultPhone.addEventListener('input', (e) => {
+        consultPhone.value = formatPhone(e.target.value.replace(/\D/g, ''));
+      });
+
+      consultPhone.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace') {
+          const cur = consultPhone.selectionStart;
+          if (cur === consultPhone.selectionEnd && cur > 0) {
+            const charBefore = consultPhone.value[cur - 1];
+            if (/\D/.test(charBefore)) {
+              e.preventDefault();
+              let val = consultPhone.value;
+              let idx = cur - 1;
+              while (idx >= 0 && /\D/.test(val[idx])) idx--;
+              if (idx >= 0 && val[idx] !== '+') {
+                consultPhone.value = formatPhone((val.slice(0, idx) + val.slice(cur)).replace(/\D/g, ''));
+              } else {
+                consultPhone.value = '';
+              }
+            }
+          }
+        }
+      });
+
+      consultForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (consultPhone.value.trim().length < 18) {
+          alert('Пожалуйста, введите полный номер телефона: +7 (XXX) XXX-XX-XX');
+          consultPhone.focus();
+          return;
+        }
+
+        const consultData = {
+          clientName: document.getElementById('consult-name').value,
+          phone: consultPhone.value,
+          car: document.getElementById('consult-car').value,
+          description: document.getElementById('consult-desc').value,
+          type: "consultation"
+        };
+
+        console.log('Запрос на консультацию / кастом для бэкенда:', consultData);
+        consultForm.style.display = 'none';
+        consultSuccess.style.display = 'block';
+        consultForm.reset();
+      });
+    }
+  </script>
+
+  <!-- Подключение темы -->
+  <script src="theme.js"></script>
+</body>
+</html>
