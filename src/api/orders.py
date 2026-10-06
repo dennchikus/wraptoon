@@ -36,21 +36,6 @@ async def add_order(
         "data": result
     }
 
-@router.put(
-    "/{order_id}",
-    summary="Полное изменение данных заказа",
-    description="Полностью перезаписывает информацию о заказе по его идентификатору"
-)
-async def full_update_order(
-        db: DBDep,
-        order_id: int,
-        data: RequestAddOrder
-):
-    await db.orders.edit(id=order_id, data=data)
-    await db.commit()
-
-    return {"status": "OK"}
-
 @router.patch(
     "/{order_id}",
     summary="Частичное изменение данных заказа",
