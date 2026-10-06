@@ -13,6 +13,7 @@ from src.api.details import router as router_details
 from src.api.services import router as router_services
 from src.api.services_details import router as router_services_details
 from src.api.orders import router as router_orders
+from src.api.consultations import router as router_consultation
 
 app = FastAPI()
 
@@ -20,6 +21,8 @@ app.include_router(router_details)
 app.include_router(router_services)
 app.include_router(router_services_details)
 app.include_router(router_orders)
+app.include_router(router_consultation)
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", reload=True)
