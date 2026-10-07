@@ -12,3 +12,9 @@ class PATCHServiceDetail(BaseModel):
     service_id: int | None = Field(default=None)
     detail_id: int | None = Field(default=None)
     price: int | None = Field(default=None)
+
+class ReadableServiceDetails(BaseModel):
+    id: int
+    name_service: str
+    name_detail: str
+    price: int

@@ -7,7 +7,7 @@ class RequestAddOrder(BaseModel):
     client_number: str
     client_car: str
     client_comment: str | None = Field(None)
-    ids_service_details: str | None = Field(None)
+    ids_service_details: dict[int, int] | None = Field(None)
 
 class Order(RequestAddOrder):
     id: int
@@ -18,6 +18,7 @@ class Order(RequestAddOrder):
 
 class AddOrder(RequestAddOrder):
     order_type: str = Field(default="calculator")
+    price: int | None = Field(None)
 
 class PATCHOrder(BaseModel):
     client_name: str | None = Field(default=None)
@@ -25,5 +26,5 @@ class PATCHOrder(BaseModel):
     client_car: str | None = Field(default=None)
     client_comment: str | None = Field(default=None)
     price: int | None = Field(default=None)
-    ids_service_details: str | None = Field(default=None)
+    ids_service_details: dict[int, int] | None = Field(default=None)
     status: str | None = Field(default=None)

@@ -4,7 +4,7 @@ from src.models.services_details import ServicesDetailsORM
 from src.models.details import DetailsORM
 from src.models.services import ServicesORM
 from src.repositories.base import BaseRepository
-from src.schemas.services_details import ServiceDetail
+from src.schemas.services_details import ServiceDetail, ReadableServiceDetails
 
 class ServicesDetailsRepository(BaseRepository):
     model = ServicesDetailsORM
@@ -37,3 +37,20 @@ class ServicesDetailsRepository(BaseRepository):
         )
 
         await self.session.execute(result)
+
+    async def get_readable_all_relationships(self):
+
+        names_details_and_services = (
+            select(
+                self.model.id,
+                DetailsORM.name_detail.label("name_detail"),
+                ServicesORM.name_service.label("name_service"),
+                self.model.price
+            )
+            .select_from(self.model)
+            .join(DetailsORM, DetailsORM.id == self.model.detail_id)
+            .join(ServicesORM, ServicesORM.id == self.model.service_id)
+        )
+
+        result = await self.session.execute(names_details_and_services)
+        return [ReadableServiceDetails.model_validate(model) for model in result.mappings().all()]

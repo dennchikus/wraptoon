@@ -55,7 +55,7 @@ async def partially_edit_consultation(
     summary="Удаление записи из перечня",
     description="Полностью удаляет запись на консультацию из перечня по ее идентификатору"
 )
-async def delete_order(
+async def delete_consultation(
         db: DBDep,
         consultation_id: int,
 ):

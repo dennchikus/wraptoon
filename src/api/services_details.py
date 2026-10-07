@@ -17,7 +17,7 @@ router = APIRouter(
 async def get_all_prices(
         db: DBDep,
 ):
-    result = await db.services_details.get_all()
+    result = await db.services_details.get_readable_all_relationships()
     return result
 
 @router.post(

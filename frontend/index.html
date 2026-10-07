@@ -240,6 +240,8 @@
 
   <!-- СКРИПТ КАРУСЕЛИ РАБОТ: СТРЕЛКИ + СВАЙПЫ + КЛИКИ -->
   <script>
+    const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : 'http://127.0.0.1:8000';
+
     // Данные для карусели
     const projects = [
       {
@@ -419,7 +421,7 @@
         }
       });
 
-      consultForm.addEventListener('submit', (e) => {
+      consultForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (consultPhone.value.trim().length < 18) {
           alert('Пожалуйста, введите полный номер телефона: +7 (XXX) XXX-XX-XX');
@@ -427,18 +429,45 @@
           return;
         }
 
-        const consultData = {
-          clientName: document.getElementById('consult-name').value,
-          phone: consultPhone.value,
-          car: document.getElementById('consult-car').value,
-          description: document.getElementById('consult-desc').value,
-          type: "consultation"
+        const payload = {
+          client_name: document.getElementById('consult-name').value.trim(),
+          client_number: consultPhone.value.trim(),
+          client_car: document.getElementById('consult-car').value.trim(),
+          client_comment: document.getElementById('consult-desc').value.trim() || null
         };
 
-        console.log('Запрос на консультацию / кастом с главной страницы:', consultData);
-        consultForm.style.display = 'none';
-        consultSuccess.style.display = 'block';
-        consultForm.reset();
+        const submitBtn = consultForm.querySelector('button[type="submit"]');
+        const origBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+
+        try {
+          const response = await fetch(`${API_BASE}/consultations`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => null);
+            const errorMsg = (errData && errData.detail)
+              ? (typeof errData.detail === 'string' ? errData.detail : JSON.stringify(errData.detail))
+              : `Ошибка сервера (${response.status})`;
+            throw new Error(errorMsg);
+          }
+
+          consultForm.style.display = 'none';
+          consultSuccess.style.display = 'block';
+          consultForm.reset();
+        } catch (err) {
+          console.error('Ошибка при отправке запроса на консультацию:', err);
+          alert('Не удалось отправить запрос: ' + err.message);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origBtnText;
+        }
       });
     }
   </script>

@@ -376,6 +376,8 @@
 
   <!-- СКРИПТ КАЛЬКУЛЯТОРА И СТЕППЕРОВ -->
   <script>
+    const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : 'http://127.0.0.1:8000';
+
     const items = document.querySelectorAll('.calc-item');
     const totalPriceEl = document.getElementById('total-price');
     const bookBtn = document.getElementById('book-btn');
@@ -405,6 +407,62 @@
       totalPriceEl.textContent = formatNumber(total);
       return { total, countSelected };
     }
+
+    async function loadPrices() {
+      try {
+        const response = await fetch(`${API_BASE}/prices`);
+        if (!response.ok) return;
+        const prices = await response.json();
+
+        items.forEach(item => {
+          const itemService = (item.dataset.service || '').toLowerCase();
+          const itemTitle = (item.querySelector('span')?.textContent || '').toLowerCase();
+
+          const found = prices.find(p => {
+            const s = (p.name_service || '').toLowerCase();
+            const d = (p.name_detail || '').toLowerCase();
+
+            const isServ = (itemService.includes('брон') && s.includes('брон')) ||
+                           itemService.includes(s) || s.includes(itemService);
+            if (!isServ) return false;
+
+            if (itemTitle.includes(d) || d.includes(itemTitle)) return true;
+            if (d.includes('двер') && itemTitle.includes('двер')) return true;
+            if (d.includes('глянц') && itemTitle.includes('глянц')) return true;
+            if (d.includes('крыл') && itemTitle.includes('крыл')) {
+              return (d.includes('перед') && itemTitle.includes('перед')) ||
+                     (d.includes('зад') && itemTitle.includes('зад'));
+            }
+            if ((d.includes('стекл') || d.includes('стёкл')) && (itemTitle.includes('стекл') || itemTitle.includes('стёкл'))) {
+              return (d.includes('лобов') && itemTitle.includes('лобов')) ||
+                     (d.includes('боков') && itemTitle.includes('боков')) ||
+                     (d.includes('задн') && itemTitle.includes('задн'));
+            }
+            return false;
+          });
+
+          if (found) {
+            item.dataset.id = found.id;
+            item.dataset.price = found.price;
+            const priceLabel = item.querySelector('.item-price') || item.querySelector('span:last-child');
+            if (priceLabel) {
+              if (item.dataset.type === 'counter') {
+                priceLabel.dataset.base = found.price;
+                const count = parseInt(item.dataset.count, 10) || 1;
+                priceLabel.textContent = formatNumber(found.price * (item.classList.contains('is-selected') ? count : 1));
+              } else {
+                priceLabel.textContent = formatNumber(found.price);
+              }
+            }
+          }
+        });
+        calculateTotal();
+      } catch (err) {
+        console.warn('Не удалось загрузить цены с бэкенда, используем базовые:', err);
+      }
+    }
+
+    loadPrices();
 
     items.forEach(item => {
       const isCounter = item.dataset.type === 'counter';
@@ -555,7 +613,7 @@
     });
 
     // Отправка формы заявки
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       if (phoneInput.value.trim().length < 18) {
@@ -564,33 +622,79 @@
         return;
       }
 
-      // Собираем данные (в будущем отправятся на FastAPI бэкенд через fetch)
-      const selectedItems = [];
+      const selectedMap = {};
       items.forEach(item => {
         if (item.classList.contains('is-selected')) {
-          const name = item.querySelector('span').textContent.trim();
-          const service = item.dataset.service;
+          const id = parseInt(item.dataset.id, 10);
           const count = parseInt(item.dataset.count, 10) || 1;
-          const price = (parseInt(item.dataset.price, 10) || 0) * count;
-          selectedItems.push({ service, name, count, price });
+          if (id) {
+            selectedMap[id] = count;
+          }
         }
       });
 
-      const orderData = {
-        clientName: document.getElementById('client-name').value,
-        phone: document.getElementById('client-phone').value,
-        car: document.getElementById('client-car').value,
-        comment: document.getElementById('client-comment').value,
-        items: selectedItems,
-        total: calculateTotal().total
+      if (Object.keys(selectedMap).length === 0) {
+        alert('Пожалуйста, выберите хотя бы одну услугу в калькуляторе!');
+        return;
+      }
+
+      const payload = {
+        client_name: document.getElementById('client-name').value.trim(),
+        client_number: document.getElementById('client-phone').value.trim(),
+        client_car: document.getElementById('client-car').value.trim(),
+        client_comment: document.getElementById('client-comment').value.trim() || null,
+        ids_service_details: selectedMap
       };
 
-      console.log('Готовый заказ для бэкенда FastAPI:', orderData);
+      const submitBtn = bookingForm.querySelector('button[type="submit"]');
+      const origBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Отправка...';
 
-      // Переключаем на экран успеха
-      bookingForm.style.display = 'none';
-      bookingSuccess.style.display = 'block';
-      bookingForm.reset();
+      try {
+        const response = await fetch(`${API_BASE}/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errData = await response.json().catch(() => null);
+          const errorMsg = (errData && errData.detail)
+            ? (typeof errData.detail === 'string' ? errData.detail : JSON.stringify(errData.detail))
+            : `Ошибка сервера (${response.status})`;
+          throw new Error(errorMsg);
+        }
+
+        // Переключаем на экран успеха
+        bookingForm.style.display = 'none';
+        bookingSuccess.style.display = 'block';
+        bookingForm.reset();
+
+        // Сбрасываем выбранные пункты в калькуляторе
+        items.forEach(item => {
+          item.classList.remove('is-selected');
+          if (item.dataset.type === 'counter') {
+            const stepper = item.querySelector('.stepper-controls');
+            if (stepper) stepper.style.display = 'none';
+            item.dataset.count = 0;
+            const countEl = item.querySelector('.stepper-count');
+            if (countEl) countEl.textContent = '1';
+            const priceEl = item.querySelector('.item-price');
+            const basePrice = parseInt(item.dataset.price, 10) || 0;
+            if (priceEl) priceEl.textContent = formatNumber(basePrice);
+          }
+        });
+        calculateTotal();
+      } catch (err) {
+        console.error('Ошибка при создании заявки:', err);
+        alert('Не удалось отправить заявку: ' + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = origBtnText;
+      }
     });
 
     // --- ЛОГИКА МОДАЛКИ КОНСУЛЬТАЦИИ С МАСТЕРОМ ---
@@ -641,7 +745,7 @@
         }
       });
 
-      consultForm.addEventListener('submit', (e) => {
+      consultForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (consultPhone.value.trim().length < 18) {
           alert('Пожалуйста, введите полный номер телефона: +7 (XXX) XXX-XX-XX');
@@ -649,18 +753,45 @@
           return;
         }
 
-        const consultData = {
-          clientName: document.getElementById('consult-name').value,
-          phone: consultPhone.value,
-          car: document.getElementById('consult-car').value,
-          description: document.getElementById('consult-desc').value,
-          type: "consultation"
+        const payload = {
+          client_name: document.getElementById('consult-name').value.trim(),
+          client_number: consultPhone.value.trim(),
+          client_car: document.getElementById('consult-car').value.trim(),
+          client_comment: document.getElementById('consult-desc').value.trim() || null
         };
 
-        console.log('Запрос на консультацию / кастом для бэкенда:', consultData);
-        consultForm.style.display = 'none';
-        consultSuccess.style.display = 'block';
-        consultForm.reset();
+        const submitBtn = consultForm.querySelector('button[type="submit"]');
+        const origBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+
+        try {
+          const response = await fetch(`${API_BASE}/consultations`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const errData = await response.json().catch(() => null);
+            const errorMsg = (errData && errData.detail)
+              ? (typeof errData.detail === 'string' ? errData.detail : JSON.stringify(errData.detail))
+              : `Ошибка сервера (${response.status})`;
+            throw new Error(errorMsg);
+          }
+
+          consultForm.style.display = 'none';
+          consultSuccess.style.display = 'block';
+          consultForm.reset();
+        } catch (err) {
+          console.error('Ошибка при отправке запроса на консультацию:', err);
+          alert('Не удалось отправить запрос: ' + err.message);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = origBtnText;
+        }
       });
     }
   </script>

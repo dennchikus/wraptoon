@@ -27,7 +27,14 @@ async def add_order(
         db: DBDep,
         data: RequestAddOrder
 ):
-    _data = AddOrder(order_type="calculator", **data.model_dump())
+    price = 0
+    if data.ids_service_details is not None:
+        ids = (data.ids_service_details.keys())
+        for i in ids:
+            service_detail = await db.services_details.get_one_or_none(id=i)
+            price += service_detail.price * data.ids_service_details[i]
+
+    _data = AddOrder(order_type="calculator", price=price, **data.model_dump())
     result = await db.orders.add(data=_data)
     await db.commit()
 
