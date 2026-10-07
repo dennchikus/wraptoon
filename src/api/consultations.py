@@ -8,13 +8,21 @@ router = APIRouter(
     tags=["Консультации"]
 )
 
-@router.get("")
+@router.get(
+    "",
+    summary="Получить список записей на консультацию",
+    description="Выводится перечень записей на консультацию"
+)
 async def get_all_consultations(
         db: DBDep
 ):
     return await db.orders.get_filtered(order_type="consultation")
 
-@router.post("")
+@router.post(
+    "",
+    summary="Добавление новой записи на консультацию",
+    description="Создает новую запись консультации в перечне"
+)
 async def add_consultation(
         db: DBDep,
         data: RequestAddConsultation
@@ -28,7 +36,11 @@ async def add_consultation(
         "data": result
     }
 
-@router.patch("/{consultation_id}")
+@router.patch(
+    "/{consultation_id}",
+    summary="Изменение данных записи по идентификатору",
+    description="Корректировка данных клиента по идентификатору его записи в перечне"
+)
 async def partially_edit_consultation(
         db: DBDep,
         consultation_id: int,
@@ -40,6 +52,8 @@ async def partially_edit_consultation(
 
 @router.delete(
     "/{consultation_id}",
+    summary="Удаление записи из перечня",
+    description="Полностью удаляет запись на консультацию из перечня по ее идентификатору"
 )
 async def delete_order(
         db: DBDep,
