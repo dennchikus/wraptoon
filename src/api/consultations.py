@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from src.schemas.consultations import RequestAddConsultation, AddConsultation, PATCHConsultation
-from src.api.dependencies import DBDep
+from src.api.dependencies import DBDep, AdminDep
 
 router = APIRouter(
     prefix="/consultations",
@@ -14,8 +14,10 @@ router = APIRouter(
     description="Выводится перечень записей на консультацию"
 )
 async def get_all_consultations(
-        db: DBDep
+        db: DBDep,
+        _:AdminDep
 ):
+
     return await db.orders.get_filtered(order_type="consultation")
 
 @router.post(
@@ -43,6 +45,7 @@ async def add_consultation(
 )
 async def partially_edit_consultation(
         db: DBDep,
+        _:AdminDep,
         consultation_id: int,
         data: PATCHConsultation
 ):
@@ -57,6 +60,7 @@ async def partially_edit_consultation(
 )
 async def delete_consultation(
         db: DBDep,
+        _: AdminDep,
         consultation_id: int,
 ):
 

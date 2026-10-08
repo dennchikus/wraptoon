@@ -17,7 +17,11 @@ from src.api.orders import router as router_orders
 from src.api.consultations import router as router_consultation
 
 from src.config import settings
-app = FastAPI()
+app = FastAPI(
+    docs_url="/docs" if settings.MODE == "DEV" else None,
+    redoc_url="/redoc" if settings.MODE == "DEV" else None,
+    openapi_url="/openapi.json" if settings.MODE == "DEV" else None,
+)
 
 app.add_middleware(
     CORSMiddleware,

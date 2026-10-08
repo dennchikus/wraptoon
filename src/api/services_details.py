@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.api.dependencies import DBDep
+from src.api.dependencies import DBDep, AdminDep
 from src.schemas.services_details import RequestAddServiceDetail, PATCHServiceDetail
 
 
@@ -27,6 +27,7 @@ async def get_all_prices(
 )
 async def add_price(
         db: DBDep,
+        _: AdminDep,
         data: RequestAddServiceDetail
 ):
     result = await db.services_details.add(data=data)
@@ -44,6 +45,7 @@ async def add_price(
 )
 async def full_update_price(
         db: DBDep,
+        _: AdminDep,
         price_id: int,
         data: RequestAddServiceDetail
 ):
@@ -58,6 +60,7 @@ async def full_update_price(
 )
 async def partially_update_price(
         db: DBDep,
+        _: AdminDep,
         price_id: int,
         data: PATCHServiceDetail
 ):
@@ -72,6 +75,7 @@ async def partially_update_price(
 )
 async def delete_price(
         db: DBDep,
+        _: AdminDep,
         price_id: int
 ):
     await db.services_details.delete(id=price_id)

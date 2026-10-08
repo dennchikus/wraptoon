@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from src.api.dependencies import DBDep
+from src.api.dependencies import DBDep, AdminDep
 from src.schemas.orders import RequestAddOrder, PATCHOrder, AddOrder
 
 router = APIRouter(
@@ -14,7 +14,8 @@ router = APIRouter(
     description="Возвращает перечень всех заказов"
 )
 async def get_all_orders(
-        db: DBDep
+        db: DBDep,
+        _: AdminDep,
 ):
     return await db.orders.get_filtered(order_type="calculator")
 
@@ -49,9 +50,10 @@ async def add_order(
     description="Позволяет частично скорректировать информацию о заказе по его идентификатору"
 )
 async def partially_update_order(
-    db: DBDep,
-    order_id: int,
-    data: PATCHOrder
+        db: DBDep,
+        _: AdminDep,
+        order_id: int,
+        data: PATCHOrder
 ):
     await db.orders.edit(data=data, is_patch=True, id=order_id)
     await db.commit()
@@ -64,6 +66,7 @@ async def partially_update_order(
 )
 async def delete_order(
         db: DBDep,
+        _: AdminDep,
         order_id: int,
 ):
 

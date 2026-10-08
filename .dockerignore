@@ -1,0 +1,28 @@
+# Виртуальные окружения и кэши пакетов
+.venv/
+.cache/
+
+# Git
+.git/
+.gitignore
+
+# IDE и редакторы
+.idea/
+.vscode/
+
+# Байткод Python и кэш
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Локальные переменные окружения
+.env
+
+# Фронтенд (раздается хостовым Nginx)
+frontend/
+
+# Документация и вспомогательные файлы
+README.md
+ROADMAP.md
+DEPLOY_PLAN.md

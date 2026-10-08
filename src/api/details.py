@@ -1,11 +1,12 @@
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Depends
 
-from src.api.dependencies import DBDep
+from src.api.dependencies import DBDep, verify_admin_token
 from src.schemas.details import RequestAddDetails
 
 router = APIRouter(
     prefix="/details",
-    tags=["Детали"]
+    tags=["Детали"],
+    dependencies=[Depends(verify_admin_token)]
 )
 
 @router.get(
