@@ -23,6 +23,5 @@ __pycache__/
 frontend/
 
 # Документация и вспомогательные файлы
-README.md
 ROADMAP.md
 DEPLOY_PLAN.md
