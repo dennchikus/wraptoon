@@ -9,6 +9,10 @@ class Settings(BaseSettings):
     MODE: Literal["DEV","PROD"] = "DEV"
     SECRET_ADMIN_TOKEN: str = "dev_token"
 
+    TG_BOT_APIKEY: str
+    TG_ADMIN_CHAT_IDS: list[int]
+    TG_PROXY: str
+
     DB_HOST: str
     DB_PORT: int
     DB_USER: str

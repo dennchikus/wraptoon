@@ -1,7 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 
 from src.api.dependencies import DBDep, AdminDep
 from src.schemas.orders import RequestAddOrder, PATCHOrder, AddOrder
+from src.services.tg_notification_bot import send_notification_tg, TemplatesMessages
 
 router = APIRouter(
     prefix="/orders",
@@ -26,7 +27,8 @@ async def get_all_orders(
 )
 async def add_order(
         db: DBDep,
-        data: RequestAddOrder
+        data: RequestAddOrder,
+        background_tasks: BackgroundTasks
 ):
     price = 0
     if data.ids_service_details is not None:
@@ -38,6 +40,17 @@ async def add_order(
     _data = AddOrder(order_type="calculator", price=price, **data.model_dump())
     result = await db.orders.add(data=_data)
     await db.commit()
+
+    tg_message_text = TemplatesMessages.order_message(
+        client_name=data.client_name,
+        client_number=data.client_number,
+        client_car=data.client_car,
+        client_comment=data.client_comment,
+        price=price,
+        # ids_service_details=data.ids_service_details
+    )
+
+    background_tasks.add_task(send_notification_tg, text=tg_message_text)
 
     return {
         "status": "OK",

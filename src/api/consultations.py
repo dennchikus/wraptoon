@@ -1,7 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 
 from src.schemas.consultations import RequestAddConsultation, AddConsultation, PATCHConsultation
 from src.api.dependencies import DBDep, AdminDep
+from src.services.tg_notification_bot import send_notification_tg, TemplatesMessages
 
 router = APIRouter(
     prefix="/consultations",
@@ -27,11 +28,21 @@ async def get_all_consultations(
 )
 async def add_consultation(
         db: DBDep,
-        data: RequestAddConsultation
+        data: RequestAddConsultation,
+        background_tasks: BackgroundTasks
 ):
     _data = AddConsultation(order_type="consultation", **data.model_dump())
     result = await db.orders.add(data=_data)
     await db.commit()
+
+    tg_message_text = TemplatesMessages.consultation_message(
+        client_name=data.client_name,
+        client_number=data.client_number,
+        client_car=data.client_car,
+        client_comment=data.client_comment
+    )
+
+    background_tasks.add_task(send_notification_tg, text=tg_message_text)
 
     return {
         "status": "OK",
