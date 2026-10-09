@@ -1,4 +1,5 @@
 from httpx import AsyncClient
+from html import escape
 
 from src.config import settings
 
@@ -30,11 +31,11 @@ class TemplatesMessages:
         comment_text = client_comment if client_comment else "Не указан"
         return (
             "🎨 <b>Новая заявка на консультацию!</b>\n\n"
-            f"👤 <b>Клиент:</b> {client_name}\n"
-            f"📞 <b>Телефон:</b> <code>{client_number}</code>\n"
-            f"🚗 <b>Автомобиль:</b> {client_car}\n\n"
+            f"👤 <b>Клиент:</b> {escape(client_name)}\n"
+            f"📞 <b>Телефон:</b> <code>{escape(client_number)}</code>\n"
+            f"🚗 <b>Автомобиль:</b> {escape(client_car)}\n\n"
             f"💬 <b>Комментарий:</b>\n"
-            f"<i>{comment_text}</i>"
+            f"<i>{escape(comment_text)}</i>"
         )
 
     @staticmethod
@@ -43,16 +44,22 @@ class TemplatesMessages:
         client_number: str,
         client_car: str,
         price: int,
-        client_comment: str | None = None
+        items: list[str] | None = None,
+        client_comment: str | None = None,
     ) -> str:
+        items_block = ""
+        if items:
+            items_text = "\n".join(items)
+            items_block = f"\n\n<blockquote expandable>📦 <b>Состав заказа:</b>\n{items_text}</blockquote>"
         comment_text = client_comment if client_comment else "Не указан"
         formatted_price = f"{price:,}".replace(",", " ")
         return (
             "🔥 <b>Новый заказ с калькулятора!</b>\n\n"
-            f"👤 <b>Клиент:</b> {client_name}\n"
-            f"📞 <b>Телефон:</b> <code>{client_number}</code>\n"
-            f"🚗 <b>Автомобиль:</b> {client_car}\n"
+            f"👤 <b>Клиент:</b> {escape(client_name)}\n"
+            f"📞 <b>Телефон:</b> <code>{escape(client_number)}</code>\n"
+            f"🚗 <b>Автомобиль:</b> {escape(client_car)}\n"
             f"💰 <b>Расчётная сумма:</b> <b>{formatted_price} ₽</b>\n\n"
             f"💬 <b>Комментарий:</b>\n"
-            f"<i>{comment_text}</i>"
+            f"<i>{escape(comment_text)}</i>"
+            f"{items_block}"
         )

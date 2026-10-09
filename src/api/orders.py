@@ -31,15 +31,21 @@ async def add_order(
         background_tasks: BackgroundTasks
 ):
     price = 0
+    items = []
     if data.ids_service_details is not None:
-        ids = (data.ids_service_details.keys())
-        for i in ids:
-            service_detail = await db.services_details.get_one_or_none(id=i)
-            price += service_detail.price * data.ids_service_details[i]
+        ids = list(data.ids_service_details.keys())
+        model = await db.services_details.get_readable_all_relationships(ids=ids)
+        for item in model:
+            item_quantity = data.ids_service_details[item.id]
+            price += item_quantity * item.price
+            formated_price_single_item = f"{item.price * item_quantity:,}".replace(",", " ")
+            items.append(f"• {item.name_detail} ({item.name_service}) - {item_quantity} шт. - {formated_price_single_item} ₽")
 
     _data = AddOrder(order_type="calculator", price=price, **data.model_dump())
     result = await db.orders.add(data=_data)
     await db.commit()
+
+
 
     tg_message_text = TemplatesMessages.order_message(
         client_name=data.client_name,
@@ -47,7 +53,7 @@ async def add_order(
         client_car=data.client_car,
         client_comment=data.client_comment,
         price=price,
-        # ids_service_details=data.ids_service_details
+        items=items
     )
 
     background_tasks.add_task(send_notification_tg, text=tg_message_text)

@@ -38,7 +38,7 @@ class ServicesDetailsRepository(BaseRepository):
 
         await self.session.execute(result)
 
-    async def get_readable_all_relationships(self):
+    async def get_readable_all_relationships(self, ids: list[int] | None = None):
 
         names_details_and_services = (
             select(
@@ -51,6 +51,9 @@ class ServicesDetailsRepository(BaseRepository):
             .join(DetailsORM, DetailsORM.id == self.model.detail_id)
             .join(ServicesORM, ServicesORM.id == self.model.service_id)
         )
+
+        if ids is not None:
+            names_details_and_services = names_details_and_services.filter(self.model.id.in_(ids))
 
         result = await self.session.execute(names_details_and_services)
         return [ReadableServiceDetails.model_validate(model) for model in result.mappings().all()]
