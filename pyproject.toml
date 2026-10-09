@@ -1,7 +1,7 @@
 [project]
 name = "service-oriented-systems"
-version = "0.1.0"
-description = "Add your description here"
+version = "2.2.0"
+description = "Веб-сервис студии автодетейлинга и стайлинга WRAP TOON"
 readme = "README.md"
 authors = [
     { name = "jokesss43", email = "kkk-lll-1995@inbox.ru" }
