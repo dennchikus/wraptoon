@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/dark_logo_32.png">
-  <link rel="stylesheet" href="style.css?v=2.3.0">
+  <link rel="stylesheet" href="style.css?v=2.4.0">
 </head>
 <body>
   <!-- ШАПКА НА ВСЮ ШИРИНУ -->
@@ -131,37 +131,37 @@
           
           <!-- Карточка 1 (Левая / боковая) -->
           <div class="showcase-card is-side" data-index="0">
-            <div class="showcase-img-placeholder" style="background: linear-gradient(135deg, #1e293b, #334155); color: #fff;">
-              <span style="font-size: 40px; margin-bottom: 8px;">🚘</span>
-              <span>ФОТО АВТО #1</span>
+            <div class="showcase-img-box">
+              <img src="assets/full_vinil_bmwm8grancoupe.png" alt="BMW M8 Gran Coupe" class="showcase-img">
+              <span class="showcase-badge">ТОП ПРОЕКТ</span>
             </div>
             <div class="showcase-info">
-              <h4>Porsche 911 Carrera</h4>
-              <p>🎨 Винил: Nardo Grey суперглянец + антихром</p>
+              <h4>BMW M8 Gran Coupe</h4>
+              <p>🎨 Полная оклейка кузова винилом + антихром элементов</p>
             </div>
           </div>
 
           <!-- Карточка 2 (Центральная / АКТИВНАЯ НА ПЕРЕДНЕМ ПЛАНЕ) -->
           <div class="showcase-card is-active" data-index="1">
-            <div class="showcase-img-placeholder" style="background: linear-gradient(135deg, #F7C642, #f59e0b); color: #18181B;">
-              <span style="font-size: 48px; margin-bottom: 8px;">🛡</span>
-              <span style="background: #18181B; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 12px;">ТОП ПРОЕКТ</span>
+            <div class="showcase-img-box">
+              <img src="assets/hiphiz_individual_wraps.png" alt="HiPhi Z" class="showcase-img">
+              <span class="showcase-badge">ЭКСКЛЮЗИВ</span>
             </div>
             <div class="showcase-info">
-              <h4>BMW M5 Competition</h4>
-              <p>🛡 Матовый полиуретан кузова + бронь лобового</p>
+              <h4>HiPhi Z</h4>
+              <p>⚡ Индивидуальный дизайн и авторский стайлинг электрокара</p>
             </div>
           </div>
 
           <!-- Карточка 3 (Правая / боковая) -->
           <div class="showcase-card is-side" data-index="2">
-            <div class="showcase-img-placeholder" style="background: linear-gradient(135deg, #0f172a, #1e1b4b); color: #fff;">
-              <span style="font-size: 40px; margin-bottom: 8px;">🕶</span>
-              <span>ФОТО АВТО #3</span>
+            <div class="showcase-img-box">
+              <img src="assets/cadilac_escalade_full_wrap.png" alt="Cadillac Escalade" class="showcase-img">
+              <span class="showcase-badge">ПРЕМИУМ</span>
             </div>
             <div class="showcase-info">
-              <h4>Audi RS6 Avant</h4>
-              <p>🕶 Евротонировка 5% + полиуретан зон риска</p>
+              <h4>Cadillac Escalade</h4>
+              <p>🛡 Полная броня кузова полиуретаном и тонирование остекления</p>
             </div>
           </div>
 
@@ -287,47 +287,37 @@
   <script>
     const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : `http://${window.location.hostname || '127.0.0.1'}:8000`;
 
-    // Данные для карусели
+    // Данные для карусели выполненных работ
     const projects = [
       {
-        title: "Porsche 911 Carrera",
-        desc: "🎨 Винил: Nardo Grey суперглянец + антихром",
-        icon: "🏎",
-        gradient: "linear-gradient(135deg, #1e293b, #334155)",
-        textColor: "#fff",
-        badge: ""
-      },
-      {
-        title: "BMW M5 Competition",
-        desc: "🛡 Матовый полиуретан кузова + бронь лобового",
-        icon: "🛡",
-        gradient: "linear-gradient(135deg, #F7C642, #f59e0b)",
-        textColor: "#18181B",
+        title: "BMW M8 Gran Coupe",
+        desc: "🎨 Полная оклейка кузова премиальным винилом + антихром элементов",
+        img: "assets/full_vinil_bmwm8grancoupe.png",
         badge: "ТОП ПРОЕКТ"
       },
       {
-        title: "Audi RS6 Avant",
-        desc: "🕶 Евротонировка 5% + полиуретан зон риска",
-        icon: "🕶",
-        gradient: "linear-gradient(135deg, #0f172a, #1e1b4b)",
-        textColor: "#fff",
-        badge: ""
+        title: "HiPhi Z",
+        desc: "⚡ Индивидуальный дизайн и авторский стайлинг электрокара",
+        img: "assets/hiphiz_individual_wraps.png",
+        badge: "ЭКСКЛЮЗИВ"
       },
       {
-        title: "Mercedes-AMG GT",
-        desc: "🎨 Черный сатин + бронирование фар полиуретаном",
-        icon: "⚡",
-        gradient: "linear-gradient(135deg, #27272a, #09090b)",
-        textColor: "#fff",
-        badge: "NEW"
+        title: "Cadillac Escalade",
+        desc: "🛡 Полная броня кузова полиуретаном и тонирование остекления",
+        img: "assets/cadilac_escalade_full_wrap.png",
+        badge: "ПРЕМИУМ"
       },
       {
-        title: "Range Rover Sport",
-        desc: "🛡 Полный глянец полиуретан + бронь крыши",
-        icon: "🚙",
-        gradient: "linear-gradient(135deg, #065f46, #047857)",
-        textColor: "#fff",
-        badge: ""
+        title: "Volkswagen Touareg",
+        desc: "🛡 Защитный матовый полиуретан (PPF) всего кузова от гравия",
+        img: "assets/vwtuareg_matt_poleuretan.png",
+        badge: "ЗАЩИТА PPF"
+      },
+      {
+        title: "Volvo XC40",
+        desc: "🛡 Матовый полиуретан: бархатистый сатин и надежная броня",
+        img: "assets/volvoxc40_matt_poleuretan.png",
+        badge: "САТИН"
       }
     ];
 
@@ -351,12 +341,12 @@
         card.dataset.index = idx;
 
         const badgeHtml = item.badge 
-          ? `<span style="background: #18181B; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800; margin-top: 8px;">${item.badge}</span>` 
+          ? `<span class="showcase-badge">${item.badge}</span>` 
           : '';
 
         card.innerHTML = `
-          <div class="showcase-img-placeholder" style="background: ${item.gradient}; color: ${item.textColor};">
-            <span style="font-size: ${isActive ? '48px' : '40px'}; line-height: 1;">${item.icon}</span>
+          <div class="showcase-img-box">
+            <img src="${item.img}" alt="${item.title}" class="showcase-img" loading="lazy">
             ${badgeHtml}
           </div>
           <div class="showcase-info">
@@ -517,7 +507,7 @@
     }
   </script>
   <!-- Подключение автокомплита авто и темы -->
-  <script src="cars-autocomplete.js?v=2.3.0"></script>
-  <script src="theme.js?v=2.3.0"></script>
+  <script src="cars-autocomplete.js?v=2.4.0"></script>
+  <script src="theme.js?v=2.4.0"></script>
 </body>
 </html>

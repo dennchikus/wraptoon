@@ -934,6 +934,43 @@ h1, h2, h3, h4, .hero-title {
   z-index: 2;
 }
 
+.showcase-img-box {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: var(--border-width) solid var(--color-border);
+  background: #18181B;
+}
+
+.showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.showcase-card:hover .showcase-img {
+  transform: scale(1.05);
+}
+
+.showcase-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--color-primary);
+  color: #18181B;
+  border: 1.5px solid var(--color-border);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 900;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  z-index: 2;
+}
+
 .showcase-img-placeholder {
   width: 100%;
   height: 220px;
@@ -1266,9 +1303,9 @@ textarea.toon-input {
   box-shadow: 4px 5px 0px var(--shadow-color);
 }
 
-/* Плейсхолдер стекла с визуализацией затемнения */
+/* Плейсхолдер стекла с визуализацией затемнения / фото */
 .tint-preview-box {
-  height: 140px;
+  height: 170px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -1279,6 +1316,21 @@ textarea.toon-input {
   border-bottom: var(--border-width) solid var(--color-border);
   background: #111;
   overflow: hidden;
+}
+
+.tint-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  inset: 0;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.tint-card:hover .tint-preview-img {
+  transform: scale(1.06);
 }
 
 /* Стилизация ступеней затемнения */
@@ -1325,6 +1377,7 @@ textarea.toon-input {
   border-radius: var(--radius-pill);
   border: 1.5px solid #000;
   box-shadow: 1.5px 1.5px 0px #000;
+  z-index: 2;
 }
 
 .tint-badge--gost {
@@ -1396,4 +1449,25 @@ textarea.toon-input {
   background: var(--bg-subtle);
   border: 1px solid var(--color-border);
   color: var(--color-text);
+}
+
+/* Плашка-предупреждение в блоке тонировок */
+.tint-disclaimer-banner {
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 14px 18px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 2px 2px 0 var(--shadow-color);
+  font-size: 13px;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.tint-disclaimer-icon {
+  font-size: 24px;
+  flex-shrink: 0;
 }
