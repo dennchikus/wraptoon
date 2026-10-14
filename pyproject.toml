@@ -1,6 +1,6 @@
 [project]
 name = "service-oriented-systems"
-version = "2.2.0"
+version = "2.3.0"
 description = "Веб-сервис студии автодетейлинга и стайлинга WRAP TOON"
 readme = "README.md"
 authors = [
