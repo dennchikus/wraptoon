@@ -102,7 +102,7 @@
           <a href="/calculator" class="toon-btn toon-btn--accent" style="font-size: 15px; padding: 12px 28px;">
             🧮 ОНЛАЙН-КАЛЬКУЛЯТОР →
           </a>
-          <button id="consult-btn" type="button" class="toon-btn toon-btn--primary" style="font-size: 15px; padding: 12px 24px;">
+          <button id="consult-btn" type="button" class="toon-btn toon-btn--primary open-consult-btn" style="font-size: 15px; padding: 12px 24px;">
             🎨 КОНСУЛЬТАЦИЯ / КАСТОМ
           </button>
           <a href="/services" class="toon-btn" style="font-size: 15px; padding: 12px 24px;">
@@ -180,7 +180,9 @@
           </p>
         </div>
         <div style="margin-top: 20px;">
-          <a href="/calculator" class="toon-btn" style="width: 100%; font-size: 13px;">Рассчитать винил →</a>
+          <button type="button" class="toon-btn open-consult-btn" style="width: 100%; font-size: 13px;">
+            Обсудить с мастером →
+          </button>
         </div>
       </div>
 
@@ -410,7 +412,7 @@
       return formatted;
     }
 
-    const consultBtn = document.getElementById('consult-btn');
+    const consultBtns = document.querySelectorAll('#consult-btn, .open-consult-btn');
     const consultModal = document.getElementById('consult-modal');
     const consultCloseBtn = document.getElementById('consult-close-btn');
     const consultSuccessCloseBtn = document.getElementById('consult-success-close-btn');
@@ -418,11 +420,13 @@
     const consultSuccess = document.getElementById('consult-success');
     const consultPhone = document.getElementById('consult-phone');
 
-    if (consultBtn && consultModal) {
-      consultBtn.addEventListener('click', () => {
-        consultForm.style.display = 'block';
-        consultSuccess.style.display = 'none';
-        consultModal.showModal();
+    if (consultModal) {
+      consultBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          consultForm.style.display = 'block';
+          consultSuccess.style.display = 'none';
+          consultModal.showModal();
+        });
       });
 
       consultCloseBtn.addEventListener('click', () => consultModal.close());
