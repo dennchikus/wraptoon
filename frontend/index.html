@@ -7,13 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/dark_logo_32.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- ШАПКА НА ВСЮ ШИРИНУ -->
   <header class="toon-header">
     <a href="/" class="toon-logo">
-      <span class="logo-icon">🅤</span>
+      <img src="assets/dark_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--dark">
+      <img src="assets/light_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--light">
       <div class="logo-text">
         <strong>WRAP TOON</strong>
         <small>• EST. 2026 GARAGE •</small>
@@ -28,12 +30,51 @@
     </nav>
 
     <div class="toon-header-actions">
-      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
-      <a href="/calculator" class="toon-btn-book">
-        РАССЧИТАТЬ ПРАЙС
-      </a>
+      <button id="theme-toggle" class="theme-toggle-btn desktop-only" title="Сменить тему">🌙</button>
+      <button id="mobile-menu-btn" class="toon-burger-btn" aria-label="Открыть меню" title="Меню">
+        <div class="toon-burger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </div>
   </header>
+
+  <!-- БОКОВОЕ МОБИЛЬНОЕ МЕНЮ (ШТОРКА) -->
+  <div id="mobile-drawer" class="toon-drawer" aria-hidden="true">
+    <div class="toon-drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="toon-drawer-panel">
+      <div class="toon-drawer-header">
+        <div class="toon-logo">
+          <img src="assets/dark_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--dark">
+          <img src="assets/light_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--light">
+          <div class="logo-text">
+            <strong>WRAP TOON</strong>
+            <small>• EST. 2026 GARAGE •</small>
+          </div>
+        </div>
+        <button id="drawer-close-btn" class="toon-drawer-close" aria-label="Закрыть меню">✕</button>
+      </div>
+
+      <nav class="toon-drawer-nav">
+        <a href="/" class="drawer-nav-link active">🏠 Главная</a>
+        <a href="/calculator" class="drawer-nav-link">🧮 Калькулятор</a>
+        <a href="/services" class="drawer-nav-link">🛡 Услуги & Материалы</a>
+        <a href="/about" class="drawer-nav-link">📍 О гараже</a>
+      </nav>
+
+      <div class="toon-drawer-footer">
+        <button id="drawer-theme-toggle" class="drawer-theme-btn" type="button">
+          <span class="drawer-theme-icon">🌙</span>
+          <span class="drawer-theme-text">Тёмная тема</span>
+        </button>
+        <div class="drawer-footer-note">
+          Кстово, переулок Шохина<br>(напротив заправки ОПТИ)
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ШИРОКИЙ КОНТЕЙНЕР (1200px) -->
   <main class="container">
@@ -41,7 +82,8 @@
     <!-- 1. HERO СЕКЦИЯ: ЛОГОТИП СЛЕВА, ОПИСАНИЕ СПРАВА -->
     <div class="toon-card toon-hero">
       <div class="hero-logo-box">
-        <div class="hero-icon">🏎</div>
+        <img src="assets/dark_logo_192.png" alt="WRAP TOON" class="hero-logo-img logo-img--dark">
+        <img src="assets/light_logo_196.png" alt="WRAP TOON" class="hero-logo-img logo-img--light">
         <span>WRAP TOON</span>
       </div>
 
@@ -51,7 +93,7 @@
           <span class="toon-chip">EST. 2026</span>
         </div>
         <h1 class="hero-title">
-          Оклейка авто и детейлинг в Москве
+          Оклейка авто и детейлинг в Кстово
         </h1>
         <p class="hero-desc">
           Полная защита кузова полиуретановой бронёй, кардинальная смена цвета винилом и премиальная тонировка стёкол. Прозрачный онлайн-расчёт стоимости за 1 минуту.
@@ -169,16 +211,19 @@
       </div>
     </div>
 
-    <!-- 4. ПОЧЕМУ НАШ ГАРАЖ -->
-    <div class="toon-card">
-      <h3 style="margin-top: 0; text-transform: uppercase; font-size: 20px;">Почему выбирают наш гараж?</h3>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
-        <span class="toon-btn toon-chip">🔒 Гарантия на работы до 5 лет</span>
-        <span class="toon-btn toon-chip">📐 Раскрой строго по лекалам без ножа по кузову</span>
-        <span class="toon-btn toon-chip">🧼 Чистый бокс с правильной вентиляцией</span>
-        <span class="toon-btn toon-chip">⏱ Точные сроки без задержек</span>
-        <span class="toon-btn toon-chip">☕ Уютная зона ожидания</span>
+
+    <!-- 5. ЛОКАЦИЯ И МАРШРУТ -->
+    <div class="toon-card" style="background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div style="font-size: 11px; color: var(--color-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">📍 ЖДЁМ ВАС В БОКСЕ</div>
+        <div style="font-size: 15px; font-weight: 800;">
+          Кстово, переулок Шохина <span style="font-weight: 500; color: var(--color-muted); font-size: 14px;">(напротив заправки ОПТИ)</span>
+        </div>
+        <div style="font-size: 12px; color: var(--color-muted); margin-top: 4px;">⏰ Ежедневно с 09:00 до 20:00 • По предварительной записи</div>
       </div>
+      <a href="https://yandex.ru/maps/org/tonirovaniye_avtostyokol/32584139496/" target="_blank" rel="noopener noreferrer" class="toon-btn toon-btn--accent" style="font-size: 13px; padding: 12px 20px; white-space: nowrap; text-decoration: none;">
+        🗺 МАРШРУТ НА ЯНДЕКС КАРТАХ →
+      </a>
     </div>
 
   </main>
@@ -240,7 +285,7 @@
 
   <!-- СКРИПТ КАРУСЕЛИ РАБОТ: СТРЕЛКИ + СВАЙПЫ + КЛИКИ -->
   <script>
-    const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : 'http://127.0.0.1:8000';
+    const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : `http://${window.location.hostname || '127.0.0.1'}:8000`;
 
     // Данные для карусели
     const projects = [

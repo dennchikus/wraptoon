@@ -7,12 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/dark_logo_32.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="toon-header">
     <a href="/" class="toon-logo">
-      <span class="logo-icon">🅤</span>
+      <img src="assets/dark_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--dark">
+      <img src="assets/light_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--light">
       <div class="logo-text">
         <strong>WRAP TOON</strong>
         <small>• EST. 2026 GARAGE •</small>
@@ -27,12 +29,51 @@
     </nav>
 
     <div class="toon-header-actions">
-      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
-      <a href="/calculator" class="toon-btn-book">
-        ЗАНЯТЬ БОКС
-      </a>
+      <button id="theme-toggle" class="theme-toggle-btn desktop-only" title="Сменить тему">🌙</button>
+      <button id="mobile-menu-btn" class="toon-burger-btn" aria-label="Открыть меню" title="Меню">
+        <div class="toon-burger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </div>
   </header>
+
+  <!-- БОКОВОЕ МОБИЛЬНОЕ МЕНЮ (ШТОРКА) -->
+  <div id="mobile-drawer" class="toon-drawer" aria-hidden="true">
+    <div class="toon-drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="toon-drawer-panel">
+      <div class="toon-drawer-header">
+        <div class="toon-logo">
+          <img src="assets/dark_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--dark">
+          <img src="assets/light_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--light">
+          <div class="logo-text">
+            <strong>WRAP TOON</strong>
+            <small>• EST. 2026 GARAGE •</small>
+          </div>
+        </div>
+        <button id="drawer-close-btn" class="toon-drawer-close" aria-label="Закрыть меню">✕</button>
+      </div>
+
+      <nav class="toon-drawer-nav">
+        <a href="/" class="drawer-nav-link">🏠 Главная</a>
+        <a href="/calculator" class="drawer-nav-link">🧮 Калькулятор</a>
+        <a href="/services" class="drawer-nav-link active">🛡 Услуги & Материалы</a>
+        <a href="/about" class="drawer-nav-link">📍 О гараже</a>
+      </nav>
+
+      <div class="toon-drawer-footer">
+        <button id="drawer-theme-toggle" class="drawer-theme-btn" type="button">
+          <span class="drawer-theme-icon">🌙</span>
+          <span class="drawer-theme-text">Тёмная тема</span>
+        </button>
+        <div class="drawer-footer-note">
+          Кстово, переулок Шохина<br>(напротив заправки ОПТИ)
+        </div>
+      </div>
+    </div>
+  </div>
 
   <main class="container">
     <div class="toon-card">

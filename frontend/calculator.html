@@ -7,13 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400..900;1,400..900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/dark_logo_32.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- ШАПКА -->
   <header class="toon-header">
     <a href="/" class="toon-logo">
-      <span class="logo-icon">🅤</span>
+      <img src="assets/dark_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--dark">
+      <img src="assets/light_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--light">
       <div class="logo-text">
         <strong>WRAP TOON</strong>
         <small>• EST. 2026 GARAGE •</small>
@@ -28,110 +30,177 @@
     </nav>
 
     <div class="toon-header-actions">
-      <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">🌙</button>
-      <a href="#total-block" class="toon-btn-book">
-        ЗАНЯТЬ БОКС
-      </a>
+      <button id="theme-toggle" class="theme-toggle-btn desktop-only" title="Сменить тему">🌙</button>
+      <button id="mobile-menu-btn" class="toon-burger-btn" aria-label="Открыть меню" title="Меню">
+        <div class="toon-burger-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
     </div>
   </header>
+
+  <!-- БОКОВОЕ МОБИЛЬНОЕ МЕНЮ (ШТОРКА) -->
+  <div id="mobile-drawer" class="toon-drawer" aria-hidden="true">
+    <div class="toon-drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="toon-drawer-panel">
+      <div class="toon-drawer-header">
+        <div class="toon-logo">
+          <img src="assets/dark_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--dark">
+          <img src="assets/light_logo_64.png" alt="WRAP TOON" class="logo-img logo-img--light">
+          <div class="logo-text">
+            <strong>WRAP TOON</strong>
+            <small>• EST. 2026 GARAGE •</small>
+          </div>
+        </div>
+        <button id="drawer-close-btn" class="toon-drawer-close" aria-label="Закрыть меню">✕</button>
+      </div>
+
+      <nav class="toon-drawer-nav">
+        <a href="/" class="drawer-nav-link">🏠 Главная</a>
+        <a href="/calculator" class="drawer-nav-link active">🧮 Калькулятор</a>
+        <a href="/services" class="drawer-nav-link">🛡 Услуги & Материалы</a>
+        <a href="/about" class="drawer-nav-link">📍 О гараже</a>
+      </nav>
+
+      <div class="toon-drawer-footer">
+        <button id="drawer-theme-toggle" class="drawer-theme-btn" type="button">
+          <span class="drawer-theme-icon">🌙</span>
+          <span class="drawer-theme-text">Тёмная тема</span>
+        </button>
+        <div class="drawer-footer-note">
+          Кстово, переулок Шохина<br>(напротив заправки ОПТИ)
+        </div>
+      </div>
+    </div>
+  </div>
 
   <main class="container">
     <div class="toon-card">
       <h2 style="margin-top: 0; text-transform: uppercase;">Калькулятор оклейки</h2>
       <p style="color: var(--color-muted); margin-bottom: 24px;">Выберите нужные категории и детали для точного расчёта стоимости</p>
 
-      <!-- 1. ВИНИЛ (СМЕНА ЦВЕТА) -->
-      <details class="toon-accordion">
+      <!-- 0. ПОПУЛЯРНЫЕ НАБОРЫ И КОМПЛЕКСЫ -->
+      <details class="toon-accordion" open>
         <summary class="toon-accordion-header">
-          <span>🎨 Виниловая плёнка (смена цвета)</span>
+          <span>📦 Популярные наборы и комплексы</span>
         </summary>
         <div class="toon-accordion-content">
-          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
-            <span>Капот</span>
-            <span style="font-weight: 700;">20 000 ₽</span>
-          </div>
-          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
-            <span>Бампер передний</span>
-            <span style="font-weight: 700;">20 000 ₽</span>
-          </div>
-          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
-            <span>Бампер задний</span>
-            <span style="font-weight: 700;">20 000 ₽</span>
-          </div>
-          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Винил">
-            <span>Передние крылья (комплект)</span>
-            <span style="font-weight: 700;">17 000 ₽</span>
-          </div>
-          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Винил">
-            <span>Задние крылья (комплект)</span>
-            <span style="font-weight: 700;">17 000 ₽</span>
-          </div>
-          <div class="toon-checkbox-row calc-item" data-price="20000" data-service="Винил">
-            <span>Крыша</span>
-            <span style="font-weight: 700;">20 000 ₽</span>
-          </div>
-          
-          <!-- ДВЕРИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
-          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="12000" data-count="1" data-max="4" data-service="Винил">
-            <div style="display: flex; align-items: center;">
-              <span>Двери</span>
-              <div class="stepper-controls" style="display: none;">
-                <button type="button" class="stepper-btn minus-btn">−</button>
-                <span class="stepper-count">1</span>
-                <button type="button" class="stepper-btn plus-btn">+</button>
+          <!-- Комплекс «Зоны риска» -->
+          <div class="toon-checkbox-row bundle-card calc-item" data-price="31000" data-service="Полиуретан" data-detail="Комплекс «Зоны риска»">
+            <div class="bundle-header">
+              <div class="bundle-title">
+                🛡 Антигравийный комплекс «Зоны риска»
+                <span class="bundle-badge bundle-badge--gift">🎁 4 зоны ручек в подарок</span>
               </div>
+              <span class="item-price" style="font-weight: 800; font-size: 16px; white-space: nowrap;">от 31 000 ₽</span>
             </div>
-            <span class="item-price" data-base="12000" style="font-weight: 700;">12 000 ₽</span>
+            <p class="bundle-desc">
+              Капот целиком, передние фары, стойки лобового стекла, полоса на крышу, 4 порога, полоса заднего бампера, полоса крышки багажника + 4 зоны под ручками бесплатно в подарок.
+            </p>
           </div>
 
-          <div class="toon-checkbox-row calc-item" data-price="8000" data-service="Винил">
-            <span>Крышка багажника</span>
-            <span style="font-weight: 700;">8 000 ₽</span>
+          <!-- Евротонирование «Задний полукруг» -->
+          <div class="toon-checkbox-row bundle-card calc-item" data-price="4500" data-service="Тонировка затемненной пленкой" data-detail="Задний полукруг">
+            <div class="bundle-header">
+              <div class="bundle-title">
+                🕶 Евротонирование «Задний полукруг»
+                <span class="bundle-badge">🔥 Хит</span>
+              </div>
+              <span class="item-price" style="font-weight: 800; font-size: 16px; white-space: nowrap;">от 4 500 ₽</span>
+            </div>
+            <p class="bundle-desc">
+              Заднее стекло + 2 задних боковых стекла качественной затемнённой плёнкой (светопропускаемость на выбор: 5%, 15%, 20%, 35%, 50%).
+            </p>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Винил">
-            <span>Зеркала заднего вида</span>
-            <span style="font-weight: 700;">3 000 ₽</span>
+
+          <!-- Тонирование: Передний полукруг с опцией лобового -->
+          <div class="toon-checkbox-row bundle-card calc-item" id="bundle-front-tint" data-price="2500" data-service="Тонировка затемненной пленкой" data-detail="Передние боковые стекла">
+            <div class="bundle-header">
+              <div class="bundle-title">
+                <span>🕶 Тонирование «Передний полукруг»</span>
+                <span id="bundle-windshield-badge" class="bundle-badge bundle-badge--animated" style="display: none; background: var(--color-primary); color: #18181B;">+ С ЛОБОВЫМ СТЕКЛОМ</span>
+              </div>
+              <span class="item-price" style="font-weight: 800; font-size: 16px; white-space: nowrap;">от 2 500 ₽</span>
+            </div>
+            <p class="bundle-desc" id="bundle-front-tint-desc">
+              Два передних боковых стекла качественной затемнённой плёнкой (степень затемнения на выбор: 5%, 15%, 20%, 35%, 50%).
+            </p>
+            <div class="bundle-suboption">
+              <label class="bundle-suboption-box" id="bundle-front-windshield-box">
+                <div class="bundle-suboption-content">
+                  <input type="checkbox" id="bundle-front-windshield-checkbox" class="bundle-custom-checkbox">
+                  <span>Добавить лобовое стекло (Тонировка)</span>
+                </div>
+                <span class="bundle-suboption-price" id="bundle-front-windshield-price">+3 500 ₽</span>
+              </label>
+            </div>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Винил">
-            <span>Стойки лобового стекла</span>
-            <span style="font-weight: 700;">3 000 ₽</span>
+
+          <!-- Комплекс «Передний полукруг с лобовым» (Атермальная) -->
+          <div class="toon-checkbox-row bundle-card calc-item" data-price="12000" data-service="Тонировка атермальной пленкой" data-detail="Передний полукруг с лобовым">
+            <div class="bundle-header">
+              <div class="bundle-title">
+                ☀️ Передний полукруг с лобовым (Атермальная по ГОСТ)
+                <span class="bundle-badge">ГОСТ 70%+</span>
+              </div>
+              <span class="item-price" style="font-weight: 800; font-size: 16px; white-space: nowrap;">от 12 000 ₽</span>
+            </div>
+            <p class="bundle-desc">
+              Лобовое стекло + 2 передних боковых стекла премиальной атермальной плёнкой. Защита от палящего солнца и ультрафиолета без затемнения.
+            </p>
+          </div>
+
+          <!-- Комплекс «Передний полукруг с лобовым» (Хамелеон) -->
+          <div class="toon-checkbox-row bundle-card calc-item" data-price="12000" data-service="Тонировка хамелеон" data-detail="Передний полукруг с лобовым">
+            <div class="bundle-header">
+              <div class="bundle-title">
+                🌈 Передний полукруг с лобовым (Хамелеон Ultra Vision)
+                <span class="bundle-badge">Хамелеон</span>
+              </div>
+              <span class="item-price" style="font-weight: 800; font-size: 16px; white-space: nowrap;">от 12 000 ₽</span>
+            </div>
+            <p class="bundle-desc">
+              Лобовое стекло + 2 передних боковых стекла плёнкой Хамелеон. Эффектный перелив оттенков и атермальная защита от нагрева.
+            </p>
           </div>
         </div>
       </details>
 
-      <!-- 2. ПОЛИУРЕТАН (БРОНЯ) -->
+      <!-- 1. ПОЛИУРЕТАН (БРОНЯ PPF) -->
       <details class="toon-accordion">
         <summary class="toon-accordion-header">
           <span>🛡 Защитный полиуретан (броня PPF)</span>
         </summary>
         <div class="toon-accordion-content">
-          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан" data-detail="Капот">
             <span>Капот</span>
-            <span style="font-weight: 700;">17 000 ₽</span>
+            <span style="font-weight: 700;">от 17 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан" data-detail="Бампер передний">
             <span>Бампер передний</span>
-            <span style="font-weight: 700;">17 000 ₽</span>
+            <span style="font-weight: 700;">от 17 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан" data-detail="Бампер Задний">
             <span>Бампер задний</span>
-            <span style="font-weight: 700;">17 000 ₽</span>
+            <span style="font-weight: 700;">от 17 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан" data-detail="Передние крылья">
             <span>Передние крылья (комплект)</span>
-            <span style="font-weight: 700;">15 000 ₽</span>
+            <span style="font-weight: 700;">от 15 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="15000" data-service="Полиуретан" data-detail="Задние Крылья">
             <span>Задние крылья (комплект)</span>
-            <span style="font-weight: 700;">15 000 ₽</span>
+            <span style="font-weight: 700;">от 15 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="17000" data-service="Полиуретан" data-detail="Крыша">
             <span>Крыша</span>
-            <span style="font-weight: 700;">17 000 ₽</span>
+            <span style="font-weight: 700;">от 17 000 ₽</span>
           </div>
 
           <!-- ДВЕРИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
-          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="10000" data-count="1" data-max="4" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="10000" data-count="1" data-max="4" data-service="Полиуретан" data-detail="Дверь">
             <div style="display: flex; align-items: center;">
               <span>Двери</span>
               <div class="stepper-controls" style="display: none;">
@@ -140,29 +209,28 @@
                 <button type="button" class="stepper-btn plus-btn">+</button>
               </div>
             </div>
-            <span class="item-price" data-base="10000" style="font-weight: 700;">10 000 ₽</span>
+            <span class="item-price" data-base="10000" style="font-weight: 700;">от 10 000 ₽</span>
           </div>
 
-          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Полиуретан" data-detail="Крышка багажника">
             <span>Крышка багажника</span>
-            <span style="font-weight: 700;">6 000 ₽</span>
+            <span style="font-weight: 700;">от 6 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="4000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="4000" data-service="Полиуретан" data-detail="Фары передние">
             <span>Фары передние</span>
-            <span style="font-weight: 700;">4 000 ₽</span>
+            <span style="font-weight: 700;">от 4 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Полиуретан" data-detail="Фары задние">
             <span>Фары задние</span>
-            <span style="font-weight: 700;">3 000 ₽</span>
+            <span style="font-weight: 700;">от 3 000 ₽</span>
           </div>
-
-          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="4000" data-service="Полиуретан" data-detail="Зеркала заднего вида">
             <span>Зеркала заднего вида</span>
-            <span style="font-weight: 700;">2 000 ₽</span>
+            <span style="font-weight: 700;">от 4 000 ₽</span>
           </div>
 
           <!-- ГЛЯНЦЕВЫЕ СТОЙКИ (СО СТЕППЕРОМ ДО 6 ШТ) -->
-          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="1000" data-count="1" data-max="6" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="1000" data-count="1" data-max="6" data-service="Полиуретан" data-detail="Стойки глянцевые">
             <div style="display: flex; align-items: center;">
               <span>Глянцевые стойки</span>
               <div class="stepper-controls" style="display: none;">
@@ -171,37 +239,75 @@
                 <button type="button" class="stepper-btn plus-btn">+</button>
               </div>
             </div>
-            <span class="item-price" data-base="1000" style="font-weight: 700;">1 000 ₽</span>
+            <span class="item-price" data-base="1000" style="font-weight: 700;">от 1 000 ₽</span>
           </div>
 
-          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полиуретан">
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полиуретан" data-detail="Стойки лобового стекла">
             <span>Стойки лобового стекла</span>
-            <span style="font-weight: 700;">2 000 ₽</span>
+            <span style="font-weight: 700;">от 2 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полиуретан" data-detail="Полоса крыши">
+            <span>Полоса крыши</span>
+            <span style="font-weight: 700;">от 2 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="1000" data-service="Полиуретан" data-detail="Полоса крышки багажника">
+            <span>Полоса крышки багажника</span>
+            <span style="font-weight: 700;">от 1 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="1000" data-service="Полиуретан" data-detail="Полоса заднего бампера">
+            <span>Полоса заднего бампера</span>
+            <span style="font-weight: 700;">от 1 000 ₽</span>
+          </div>
+
+          <!-- ПОРОГИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="1000" data-count="1" data-max="4" data-service="Полиуретан" data-detail="Пороги">
+            <div style="display: flex; align-items: center;">
+              <span>Пороги</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="1000" style="font-weight: 700;">от 1 000 ₽</span>
+          </div>
+
+          <!-- ЗОНЫ ПОД РУЧКАМИ (СО СТЕППЕРОМ ДО 4 ШТ) -->
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="500" data-count="1" data-max="4" data-service="Полиуретан" data-detail="Зоны под ручками">
+            <div style="display: flex; align-items: center;">
+              <span>Зоны под ручками (пятаки)</span>
+              <div class="stepper-controls" style="display: none;">
+                <button type="button" class="stepper-btn minus-btn">−</button>
+                <span class="stepper-count">1</span>
+                <button type="button" class="stepper-btn plus-btn">+</button>
+              </div>
+            </div>
+            <span class="item-price" data-base="500" style="font-weight: 700;">от 500 ₽</span>
           </div>
         </div>
       </details>
 
-      <!-- 3. ТОНИРОВКА И СТЕКЛА -->
+      <!-- 2. ТОНИРОВКА И СТЕКЛА -->
       <details class="toon-accordion">
         <summary class="toon-accordion-header">
           <span>🕶 Тонировка и стёкла</span>
         </summary>
         <div class="toon-accordion-content">
-          <div class="toon-checkbox-row calc-item" data-price="14000" data-service="Броня">
+          <div class="toon-checkbox-row calc-item" data-price="22000" data-service="Бронирование лобового стекла" data-detail="Лобовое стекло">
             <span>Бронирование лобового стекла (ClearPlex от сколов)</span>
-            <span style="font-weight: 700;">14 000 ₽</span>
+            <span style="font-weight: 700;">от 22 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Тонировка">
+          <div class="toon-checkbox-row calc-item" data-price="3500" data-service="Тонировка затемненной пленкой" data-detail="Лобовое стекло">
             <span>Лобовое стекло (Тонировка)</span>
-            <span style="font-weight: 700;">6 000 ₽</span>
+            <span style="font-weight: 700;">от 3 500 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="5000" data-service="Тонировка">
+          <div class="toon-checkbox-row calc-item" data-price="1500" data-service="Тонировка затемненной пленкой" data-detail="Заднее стекло">
             <span>Заднее стекло (Тонировка)</span>
-            <span style="font-weight: 700;">5 000 ₽</span>
+            <span style="font-weight: 700;">от 1 500 ₽</span>
           </div>
 
           <!-- БОКОВЫЕ СТЕКЛА (СО СТЕППЕРОМ ДО 4 ШТ) -->
-          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="2500" data-count="1" data-max="4" data-service="Тонировка">
+          <div class="toon-checkbox-row calc-item" data-type="counter" data-price="1300" data-count="1" data-max="4" data-service="Тонировка затемненной пленкой" data-detail="Боковое стекло">
             <div style="display: flex; align-items: center;">
               <span>Боковые стёкла (Тонировка)</span>
               <div class="stepper-controls" style="display: none;">
@@ -210,16 +316,45 @@
                 <button type="button" class="stepper-btn plus-btn">+</button>
               </div>
             </div>
-            <span class="item-price" data-base="2500" style="font-weight: 700;">2 500 ₽</span>
+            <span class="item-price" data-base="1300" style="font-weight: 700;">от 1 300 ₽</span>
           </div>
 
-          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Тонировка">
+          <div class="toon-checkbox-row calc-item" data-price="3000" data-service="Тонировка затемненной пленкой" data-detail="Фары передние">
             <span>Фары передние (Тонировка)</span>
-            <span style="font-weight: 700;">3 000 ₽</span>
+            <span style="font-weight: 700;">от 3 000 ₽</span>
           </div>
-          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Тонировка">
+          <div class="toon-checkbox-row calc-item" data-price="6000" data-service="Тонировка затемненной пленкой" data-detail="Фары задние">
             <span>Фары задние (Тонировка)</span>
-            <span style="font-weight: 700;">2 000 ₽</span>
+            <span style="font-weight: 700;">от 6 000 ₽</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. ДОПОЛНИТЕЛЬНЫЕ РАБОТЫ -->
+      <details class="toon-accordion">
+        <summary class="toon-accordion-header">
+          <span>⚡ Дополнительные работы</span>
+        </summary>
+        <div class="toon-accordion-content">
+          <div class="toon-checkbox-row calc-item" data-price="2000" data-service="Полировка фар" data-detail="Фары передние">
+            <span>Полировка фар</span>
+            <span style="font-weight: 700;">от 2 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="5000" data-service="Установка защитной сетки в бампер" data-detail="Бампер передний">
+            <span>Установка защитной сетки в бампер</span>
+            <span style="font-weight: 700;">от 5 000 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="2500" data-service="Установка мультимедиа" data-detail="Салон">
+            <span>Установка мультимедиа</span>
+            <span style="font-weight: 700;">от 2 500 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="2500" data-service="Установка камер заднего вида" data-detail="Салон">
+            <span>Установка камер заднего вида</span>
+            <span style="font-weight: 700;">от 2 500 ₽</span>
+          </div>
+          <div class="toon-checkbox-row calc-item" data-price="0" data-individual="true" data-service="Шумоизоляция автомобиля" data-detail="Кузов">
+            <span>Шумоизоляция автомобиля</span>
+            <span style="font-weight: 700; color: var(--color-primary);">Индивидуально</span>
           </div>
         </div>
       </details>
@@ -227,7 +362,7 @@
       <!-- ИТОГОВЫЙ БЛОК -->
       <div id="total-block" style="margin-top: 32px; padding-top: 20px; border-top: 2px dashed var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div>
-          <div style="font-size: 13px; color: var(--color-muted); font-weight: 600;">ИТОГО К ОПЛАТЕ:</div>
+          <div style="font-size: 13px; color: var(--color-muted); font-weight: 600;">ОРИЕНТИРОВОЧНАЯ СТОИМОСТЬ:</div>
           <div id="total-price" style="font-size: 36px; font-weight: 900; color: var(--color-border);">0 ₽</div>
         </div>
         <button id="book-btn" class="toon-btn toon-btn--primary" style="font-size: 16px; padding: 14px 28px;">
@@ -237,18 +372,18 @@
 
     </div>
 
-    <!-- БАННЕР НЕСТАНДАРТНОГО ПРОЕКТА / КОНСУЛЬТАЦИИ -->
-    <div class="toon-card" style="background: var(--bg-subtle); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 24px;">
+    <!-- ЕДИНЫЙ БАННЕР: ВИНИЛ И ИНДИВИДУАЛЬНЫЙ ДИЗАЙН -->
+    <div class="toon-card" style="background: var(--bg-subtle); border-left: 6px solid var(--color-primary); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 24px;">
       <div>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-          <span class="toon-chip is-active" style="font-size: 11px;">🎨 ИНДИВИДУАЛЬНЫЙ ДИЗАЙН</span>
-          <span style="font-size: 14px; font-weight: 800; text-transform: uppercase;">Сложный проект или рисунок на авто?</span>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+          <span class="toon-chip is-active" style="font-size: 11px; background: var(--color-primary); color: #000;">🎨 ИНДИВИДУАЛЬНЫЙ СТАЙЛИНГ</span>
+          <span style="font-size: 15px; font-weight: 800; text-transform: uppercase;">Смена цвета автовинилом или авторский дизайн?</span>
         </div>
-        <p style="margin: 0; font-size: 14px; color: var(--color-muted); max-width: 650px; line-height: 1.4;">
-          Винилография, печать авторских рисунков на плёнке, брендирование или нестандартные элементы. Обсудите вашу задумку напрямую с мастером.
+        <p style="margin: 0; font-size: 14px; color: var(--color-muted); max-width: 760px; line-height: 1.5;">
+          Полная или частичная оклейка цветным винилом (глянец, сатин, мат, хамелеон, фактурный карбон), печать рисунков (винилография), антихром и сложные дизайн-проекты рассчитываются <b>строго индивидуально</b> под конкретный автомобиль и геометрию кузова. Обсудите задумку напрямую с мастером и подберите образцы плёнок в нашем боксе.
         </p>
       </div>
-      <button id="consult-btn" type="button" class="toon-btn toon-btn--accent" style="padding: 12px 24px; font-size: 14px;">
+      <button id="consult-btn" type="button" class="toon-btn toon-btn--accent open-consult-btn" style="padding: 14px 26px; font-size: 14px; font-weight: 800; white-space: nowrap;">
         ОБСУДИТЬ С МАСТЕРОМ →
       </button>
     </div>
@@ -376,7 +511,7 @@
 
   <!-- СКРИПТ КАЛЬКУЛЯТОРА И СТЕППЕРОВ -->
   <script>
-    const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : 'http://127.0.0.1:8000';
+    const API_BASE = window.location.origin.startsWith('http') && window.location.port !== '5500' && window.location.port !== '3000' && window.location.protocol !== 'file:' ? '' : `http://${window.location.hostname || '127.0.0.1'}:8000`;
 
     const items = document.querySelectorAll('.calc-item');
     const totalPriceEl = document.getElementById('total-price');
@@ -390,7 +525,8 @@
     const successCloseBtn = document.getElementById('success-close-btn');
 
     function formatNumber(num) {
-      return num.toLocaleString('ru-RU') + ' ₽';
+      if (!num || num === 0) return '0 ₽';
+      return 'от ' + num.toLocaleString('ru-RU') + ' ₽';
     }
 
     function calculateTotal() {
@@ -415,12 +551,23 @@
         const prices = await response.json();
 
         items.forEach(item => {
+          const itemDetail = (item.dataset.detail || '').toLowerCase();
           const itemService = (item.dataset.service || '').toLowerCase();
           const itemTitle = (item.querySelector('span')?.textContent || '').toLowerCase();
 
           const found = prices.find(p => {
             const s = (p.name_service || '').toLowerCase();
             const d = (p.name_detail || '').toLowerCase();
+
+            // Точное сопоставление, если заданы и detail, и service
+            if (itemDetail && itemService) {
+              if (itemDetail === d && (itemService === s || itemService.includes(s) || s.includes(itemService))) {
+                return true;
+              }
+              const matchServ = (itemService.includes('брон') && s.includes('брон')) ||
+                                itemService.includes(s) || s.includes(itemService);
+              return matchServ && (d.includes(itemDetail) || itemDetail.includes(d));
+            }
 
             const isServ = (itemService.includes('брон') && s.includes('брон')) ||
                            itemService.includes(s) || s.includes(itemService);
@@ -446,7 +593,9 @@
             item.dataset.price = found.price;
             const priceLabel = item.querySelector('.item-price') || item.querySelector('span:last-child');
             if (priceLabel) {
-              if (item.dataset.type === 'counter') {
+              if (item.dataset.individual === 'true' || found.price === 0) {
+                priceLabel.textContent = 'Индивидуально';
+              } else if (item.dataset.type === 'counter') {
                 priceLabel.dataset.base = found.price;
                 const count = parseInt(item.dataset.count, 10) || 1;
                 priceLabel.textContent = formatNumber(found.price * (item.classList.contains('is-selected') ? count : 1));
@@ -456,6 +605,24 @@
             }
           }
         });
+
+        // Синхронизация цен для адаптивного набора «Передний полукруг»
+        if (frontTintItem) {
+          const pWithout = prices.find(p => p.name_detail === 'Передние боковые стекла' && p.name_service === 'Тонировка затемненной пленкой');
+          const pWith = prices.find(p => p.name_detail === 'Передний полукруг с лобовым' && p.name_service === 'Тонировка затемненной пленкой');
+
+          if (pWithout) {
+            frontTintItem.dataset.idWithout = pWithout.id;
+            frontTintItem.dataset.priceWithout = pWithout.price;
+          }
+          if (pWith) {
+            frontTintItem.dataset.idWith = pWith.id;
+            frontTintItem.dataset.priceWith = pWith.price;
+          }
+
+          updateFrontTintVisuals();
+        }
+
         calculateTotal();
       } catch (err) {
         console.warn('Не удалось загрузить цены с бэкенда, используем базовые:', err);
@@ -464,11 +631,59 @@
 
     loadPrices();
 
+    // Логика чекбокса лобового стекла для набора тонирования переднего полукруга
+    const frontTintItem = document.getElementById('bundle-front-tint');
+    const windshieldCheckbox = document.getElementById('bundle-front-windshield-checkbox');
+    const frontPriceLabel = frontTintItem ? frontTintItem.querySelector('.item-price') : null;
+    const windshieldBadge = document.getElementById('bundle-windshield-badge');
+    const frontTintDesc = document.getElementById('bundle-front-tint-desc');
+    const windshieldBox = document.getElementById('bundle-front-windshield-box');
+    const windshieldPrice = document.getElementById('bundle-front-windshield-price');
+
+    function updateFrontTintVisuals() {
+      if (!frontTintItem || !windshieldCheckbox) return;
+      const isChecked = windshieldCheckbox.checked;
+
+      if (isChecked) {
+        frontTintItem.dataset.detail = 'Передний полукруг с лобовым';
+        frontTintItem.dataset.price = frontTintItem.dataset.priceWith || 6000;
+        frontTintItem.dataset.id = frontTintItem.dataset.idWith || 33;
+        if (windshieldBadge) windshieldBadge.style.display = 'inline-flex';
+        if (frontTintDesc) {
+          frontTintDesc.textContent = 'Два передних боковых + лобовое стекло качественной затемнённой плёнкой (степень затемнения на выбор: 5%, 15%, 20%, 35%, 50%).';
+        }
+        if (windshieldBox) windshieldBox.classList.add('is-checked');
+        if (windshieldPrice) windshieldPrice.textContent = '✓ Включено (+3 500 ₽)';
+      } else {
+        frontTintItem.dataset.detail = 'Передние боковые стекла';
+        frontTintItem.dataset.price = frontTintItem.dataset.priceWithout || 2500;
+        frontTintItem.dataset.id = frontTintItem.dataset.idWithout || 32;
+        if (windshieldBadge) windshieldBadge.style.display = 'none';
+        if (frontTintDesc) {
+          frontTintDesc.textContent = 'Два передних боковых стекла качественной затемнённой плёнкой (степень затемнения на выбор: 5%, 15%, 20%, 35%, 50%).';
+        }
+        if (windshieldBox) windshieldBox.classList.remove('is-checked');
+        if (windshieldPrice) windshieldPrice.textContent = '+3 500 ₽';
+      }
+
+      if (frontPriceLabel) {
+        frontPriceLabel.textContent = formatNumber(parseInt(frontTintItem.dataset.price, 10));
+      }
+    }
+
+    if (frontTintItem && windshieldCheckbox) {
+      windshieldCheckbox.addEventListener('change', () => {
+        updateFrontTintVisuals();
+        calculateTotal();
+      });
+    }
+
     items.forEach(item => {
       const isCounter = item.dataset.type === 'counter';
 
       if (!isCounter) {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+          if (e.target.closest('.bundle-suboption')) return;
           item.classList.toggle('is-selected');
           calculateTotal();
         });
@@ -478,7 +693,6 @@
         const countEl = item.querySelector('.stepper-count');
         const priceEl = item.querySelector('.item-price');
         const stepper = item.querySelector('.stepper-controls');
-        const basePrice = parseInt(item.dataset.price, 10) || 0;
         const max = parseInt(item.dataset.max, 10) || 4;
 
         item.addEventListener('click', (e) => {
@@ -489,6 +703,7 @@
             stepper.style.display = 'none';
             item.dataset.count = 0;
           } else {
+            const basePrice = parseInt(item.dataset.price, 10) || 0;
             item.classList.add('is-selected');
             stepper.style.display = 'inline-flex';
             item.dataset.count = 1;
@@ -500,6 +715,7 @@
 
         minusBtn.addEventListener('click', (e) => {
           e.stopPropagation();
+          const basePrice = parseInt(item.dataset.price, 10) || 0;
           let count = parseInt(item.dataset.count, 10) || 1;
           count -= 1;
           if (count < 1) {
@@ -516,6 +732,7 @@
 
         plusBtn.addEventListener('click', (e) => {
           e.stopPropagation();
+          const basePrice = parseInt(item.dataset.price, 10) || 0;
           let count = parseInt(item.dataset.count, 10) || 1;
           if (count < max) {
             count += 1;
@@ -687,6 +904,12 @@
             if (priceEl) priceEl.textContent = formatNumber(basePrice);
           }
         });
+
+        if (windshieldCheckbox) {
+          windshieldCheckbox.checked = false;
+          updateFrontTintVisuals();
+        }
+
         calculateTotal();
       } catch (err) {
         console.error('Ошибка при создании заявки:', err);
@@ -698,7 +921,7 @@
     });
 
     // --- ЛОГИКА МОДАЛКИ КОНСУЛЬТАЦИИ С МАСТЕРОМ ---
-    const consultBtn = document.getElementById('consult-btn');
+    const consultBtns = document.querySelectorAll('#consult-btn, .open-consult-btn');
     const consultModal = document.getElementById('consult-modal');
     const consultCloseBtn = document.getElementById('consult-close-btn');
     const consultSuccessCloseBtn = document.getElementById('consult-success-close-btn');
@@ -706,11 +929,13 @@
     const consultSuccess = document.getElementById('consult-success');
     const consultPhone = document.getElementById('consult-phone');
 
-    if (consultBtn && consultModal) {
-      consultBtn.addEventListener('click', () => {
-        consultForm.style.display = 'block';
-        consultSuccess.style.display = 'none';
-        consultModal.showModal();
+    if (consultModal) {
+      consultBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          consultForm.style.display = 'block';
+          consultSuccess.style.display = 'none';
+          consultModal.showModal();
+        });
       });
 
       consultCloseBtn.addEventListener('click', () => consultModal.close());
