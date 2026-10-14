@@ -569,12 +569,19 @@ h1, h2, h3, h4, .hero-title {
 
 /* МОБИЛЬНАЯ ШТОРКА (БОКОВОЕ МЕНЮ) */
 .toon-drawer {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 99999;
   visibility: hidden;
   pointer-events: none;
   transition: visibility 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .toon-drawer {
+    display: block;
+  }
 }
 
 .toon-drawer.is-open {
