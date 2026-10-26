@@ -1,9 +1,10 @@
 [project]
-name = "service-oriented-systems"
+name = "wraptoon"
 version = "2.3.0"
 description = "Веб-сервис студии автодетейлинга и стайлинга WRAP TOON"
 readme = "README.md"
 authors = [
+    { name = "dennchikus", email = "mdiris@vk.com" },
     { name = "jokesss43", email = "kkk-lll-1995@inbox.ru" }
 ]
 requires-python = ">=3.13"

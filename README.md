@@ -1,6 +1,7 @@
 # 🚗 WRAP TOON — Веб-сервис студии автодетейлинга и стайлинга
 
-[![Release](https://img.shields.io/badge/Release-v2.3.0-orange?logo=git&logoColor=white)](https://github.com/jokesss43/service-oriented-systems)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-wraptoon.ru-00E5FF?logo=googlechrome&logoColor=white)](https://wraptoon.ru)
+[![Release](https://img.shields.io/badge/Release-v2.3.0-orange?logo=git&logoColor=white)](https://github.com/dennchikus/wraptoon)
 [![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Telegram Bot](https://img.shields.io/badge/Telegram-Notification_Bot-26A5E4?logo=telegram&logoColor=white)](https://t.me/wraptoon_admin_bot)
@@ -10,8 +11,8 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Nginx](https://img.shields.io/badge/Reverse_Proxy-Nginx-009639?logo=nginx&logoColor=white)](https://nginx.org/)
 
-> **Курсовой проект / Выпускная квалификационная работа**  
-> **Автор разработки:** Лебедев Кирилл Денисович  
+> **Разработка:** dennchikus (Backend / Architecture) & jokesss43  
+> **Production:** [https://wraptoon.ru](https://wraptoon.ru)  
 > **Специализация:** Сервис-ориентированные системы / Программная инженерия  
 
 ---
@@ -144,8 +145,8 @@ service-oriented-systems/
 
 #### 1. Клонирование репозитория
 ```bash
-git clone https://github.com/jokesss43/service-oriented-systems.git
-cd service-oriented-systems
+git clone https://github.com/dennchikus/wraptoon.git
+cd wraptoon
 ```
 
 #### 2. Установка зависимостей через `uv`
